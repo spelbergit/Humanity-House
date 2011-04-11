@@ -1,0 +1,41 @@
+body {
+    font-family: sans-serif;
+    margin-left: 5%;
+    margin-right: 5%;
+    text-align: center;
+}
+
+table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.listTableHeader {
+    background-color: orange;
+    padding: 5px;
+    margin: 1px;
+    font-weight: bold;
+    font-size: large;
+}
+
+.listTableFirstRowCell {
+    background-color: #f0f0f0;
+    padding: 5px;
+    margin: 1px;
+    font-size: large;
+}
+
+.listTableSecondRowCell {
+    background-color: lightgray;
+    padding: 5px;
+    margin: 1px;
+    font-size: large;
+}
+
+.listTablePager {
+}
+
+sibility: hidden
+
+;
+    }
