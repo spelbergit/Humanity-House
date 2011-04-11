@@ -26,7 +26,7 @@ table {
 }
 
 .listTableSecondRowCell {
-    background-color: lightgray;
+    background-color: #d3d3d3;
     padding: 5px;
     margin: 1px;
     font-size: large;
@@ -34,8 +34,3 @@ table {
 
 .listTablePager {
 }
-
-sibility: hidden
-
-;
-    }

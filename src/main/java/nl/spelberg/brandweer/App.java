@@ -1,16 +1,11 @@
 package nl.spelberg.brandweer;
 
-import org.wicketrad.jpa.DataWebApplication;
+import org.apache.wicket.protocol.http.WebApplication;
 
-public class App extends DataWebApplication {
-
-    @Override
-    public String getDefaultPersistenceUnitName() {
-        return "manager1";
-    }
+public class App extends WebApplication {
 
     @Override
-    public Class getHomePage() {
-        return MyListPage.class;
+    public Class<HomePage> getHomePage() {
+        return HomePage.class;
     }
 }

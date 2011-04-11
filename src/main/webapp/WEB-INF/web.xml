@@ -5,19 +5,15 @@
 <web-app>
     <display-name>WicketRAD Archetype Created Web Application</display-name>
     <filter>
-        <filter-name>WicketRADWebApplication</filter-name>
-        <filter-class>
-            org.apache.wicket.protocol.http.WicketFilter
-        </filter-class>
+        <filter-name>WebApplication</filter-name>
+        <filter-class>org.apache.wicket.protocol.http.WicketFilter</filter-class>
         <init-param>
             <param-name>applicationClassName</param-name>
-            <param-value>
-                nl.spelberg.brandweer.App
-            </param-value>
+            <param-value>nl.spelberg.brandweer.App</param-value>
         </init-param>
     </filter>
     <filter-mapping>
-        <filter-name>WicketRADWebApplication</filter-name>
+        <filter-name>WebApplication</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
