@@ -4,9 +4,18 @@
 
 <web-app>
     <display-name>WicketRAD Archetype Created Web Application</display-name>
+    <!-- The SpringWebApplicationFactory will need access to a Spring Application context, configured like this... -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/applicationContext.xml</param-value>
+    </context-param>
     <filter>
         <filter-name>WebApplication</filter-name>
         <filter-class>org.apache.wicket.protocol.http.WicketFilter</filter-class>
+        <init-param>
+            <param-name>applicationFactoryClassName</param-name>
+            <param-value>org.apache.wicket.spring.SpringWebApplicationFactory</param-value>
+        </init-param>
         <init-param>
             <param-name>applicationClassName</param-name>
             <param-value>nl.spelberg.brandweer.App</param-value>
@@ -16,5 +25,8 @@
         <filter-name>WebApplication</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
 
 </web-app>
