@@ -1,0 +1,25 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.3-strict.dtd"
+      xml:lang="en" lang="en">
+<head></head>
+<body>
+<wicket:extend>
+    <h1>Vul je gegevens in en dan spammen we je helemaal gek!</h1>
+
+    <form wicket:id="personForm" id="personForm">
+        <p>
+            Naam:
+            <input type="text" wicket:id="name" class="name"/>
+        </p>
+
+        <p>
+            Email:
+            <input type="text" wicket:id="email" class="email"/>
+        </p>
+        <input type="submit" wicket:id="submit" value="Verzenden" id="submit"/>
+    </form>
+    <img wicket:id="image"/>
+
+</wicket:extend>
+</body>
+</html>

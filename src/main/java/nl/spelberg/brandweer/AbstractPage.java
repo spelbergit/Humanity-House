@@ -18,10 +18,6 @@ public abstract class AbstractPage extends WebPage {
         add(new Label("title", this.titleModel));
     }
 
-    public final Model<String> getTitleModel() {
-        return titleModel;
-    }
-
     public final String getTitle() {
         return titleModel.getObject();
     }

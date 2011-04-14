@@ -124,6 +124,11 @@
   <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" />
   <component name="EntryPointsManager">
     <entry_points version="2.0" />
+    <list size="3">
+      <item index="0" class="java.lang.String" itemvalue="javax.persistence.Column" />
+      <item index="1" class="java.lang.String" itemvalue="javax.persistence.Id" />
+      <item index="2" class="java.lang.String" itemvalue="org.springframework.beans.factory.annotation.Autowired" />
+    </list>
   </component>
   <component name="FacetAutodetectingManager">
     <autodetection-disabled>
@@ -453,6 +458,17 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/javassist/javassist/3.9.0.GA/javassist-3.9.0.GA-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: javax.servlet:servlet-api:2.3">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/javax/servlet/servlet-api/2.3/servlet-api-2.3.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/javax/servlet/servlet-api/2.3/servlet-api-2.3-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/javax/servlet/servlet-api/2.3/servlet-api-2.3-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: javax.transaction:jta:1.1">

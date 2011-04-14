@@ -84,6 +84,7 @@
     <orderEntry type="library" name="Maven: org.apache.wicket:wicket-ioc:1.4.14" level="project" />
     <orderEntry type="library" name="Maven: cglib:cglib-nodep:2.1_3" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-simple:1.5.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: javax.servlet:servlet-api:2.3" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.8.1" level="project" />
   </component>
 </module>

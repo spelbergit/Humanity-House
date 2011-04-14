@@ -10,4 +10,9 @@ public class App extends WebApplication {
     public Class<HomePage> getHomePage() {
         return HomePage.class;
     }
+
+    @Override
+    protected void init() {
+        mountBookmarkablePage("enter", EnterDetailsPage.class);
+    }
 }
