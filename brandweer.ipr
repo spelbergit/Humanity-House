@@ -52,7 +52,7 @@
             <element id="library" level="project" name="Maven: org.apache.wicket:wicket-spring:1.4.14" />
             <element id="library" level="project" name="Maven: org.apache.wicket:wicket-ioc:1.4.14" />
             <element id="library" level="project" name="Maven: cglib:cglib-nodep:2.1_3" />
-            <element id="library" level="project" name="Maven: org.slf4j:slf4j-simple:1.6.1" />
+            <element id="library" level="project" name="Maven: org.slf4j:slf4j-simple:1.5.2" />
           </element>
         </element>
       </root>
@@ -177,6 +177,9 @@
     <option name="PROJECT_PROFILE" value="Project Default" />
     <option name="USE_PROJECT_PROFILE" value="true" />
     <version value="1.0" />
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_STRING" value="-target 1.6" />
   </component>
   <component name="JavadocGenerationManager">
     <option name="OUTPUT_DIRECTORY" />
@@ -573,15 +576,15 @@
         <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.5.8/slf4j-api-1.5.8-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.slf4j:slf4j-simple:1.6.1">
+    <library name="Maven: org.slf4j:slf4j-simple:1.5.2">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-simple/1.6.1/slf4j-simple-1.6.1.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-simple/1.5.2/slf4j-simple-1.5.2.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-simple/1.6.1/slf4j-simple-1.6.1-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-simple/1.5.2/slf4j-simple-1.5.2-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-simple/1.6.1/slf4j-simple-1.6.1-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-simple/1.5.2/slf4j-simple-1.5.2-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: org.springframework:spring-aop:3.0.5.RELEASE">
