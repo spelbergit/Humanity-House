@@ -10,8 +10,8 @@ import org.apache.wicket.model.IModel;
  */
 public class PersonImagePage extends AbstractPage {
 
-    public PersonImagePage(String title, final Page page, IModel<Person> personModel) {
-        super(title);
+    public PersonImagePage(final Page page, IModel<Person> personModel) {
+        super("Foto");
         add(
                 new Link("back") {
 

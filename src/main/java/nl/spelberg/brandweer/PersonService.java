@@ -2,6 +2,8 @@ package nl.spelberg.brandweer;
 
 public interface PersonService {
 
-    public void addPerson(Person person);
+    public Person findPerson(Long id);
+
+    public void addPerson(String fotoName, String fotoType, byte[] fotoData);
 
 }
