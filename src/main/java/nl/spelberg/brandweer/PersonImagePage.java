@@ -1,5 +1,6 @@
 package nl.spelberg.brandweer;
 
+import nl.spelberg.brandweer.model.Person;
 import org.apache.wicket.Page;
 import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.markup.html.link.Link;

@@ -1,5 +1,6 @@
 package nl.spelberg.brandweer;
 
+import nl.spelberg.brandweer.model.Person;
 import org.apache.wicket.markup.html.image.resource.DynamicImageResource;
 import org.apache.wicket.model.IModel;
 

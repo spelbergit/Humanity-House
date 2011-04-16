@@ -1,16 +1,16 @@
-package nl.spelberg.brandweer;
+package nl.spelberg.brandweer.model;
 
 import java.util.Arrays;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import nl.spelberg.util.AbstractVersionedEntity;
+import nl.spelberg.util.AbstractVersioned;
 import org.springframework.util.Assert;
 
 @Entity
 @Table(name = "PERSON")
-public class Person extends AbstractVersionedEntity {
+public class Person extends AbstractVersioned {
 
     @Id
     private Long id;

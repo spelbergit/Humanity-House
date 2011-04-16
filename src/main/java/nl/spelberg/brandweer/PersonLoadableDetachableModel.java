@@ -1,5 +1,6 @@
 package nl.spelberg.brandweer;
 
+import nl.spelberg.brandweer.model.Person;
 import org.apache.wicket.model.LoadableDetachableModel;
 import org.springframework.util.Assert;
 

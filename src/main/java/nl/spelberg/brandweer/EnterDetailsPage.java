@@ -1,6 +1,7 @@
 package nl.spelberg.brandweer;
 
 import java.util.logging.Logger;
+import nl.spelberg.brandweer.model.Person;
 import org.apache.wicket.PageParameters;
 import org.apache.wicket.extensions.markup.html.image.resource.ThumbnailImageResource;
 import org.apache.wicket.markup.html.image.Image;

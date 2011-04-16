@@ -2,7 +2,7 @@ package nl.spelberg.util;
 
 import javax.persistence.Version;
 
-public class AbstractVersionedEntity implements Versioned {
+public class AbstractVersioned implements Versioned {
 
     @Version
     private Long version = 1L;

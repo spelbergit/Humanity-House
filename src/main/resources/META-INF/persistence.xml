@@ -4,7 +4,7 @@
              version="1.0">
     <persistence-unit name="hibernatePersistenceUnit" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
-        <class>nl.spelberg.brandweer.Person</class>
+        <class>nl.spelberg.brandweer.model.Person</class>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
         </properties>

@@ -5,6 +5,7 @@ import java.io.InputStream;
 import javax.annotation.Resource;
 import javax.servlet.ServletContext;
 import nl.spelberg.brandweer.dao.PersonDAO;
+import nl.spelberg.brandweer.model.Person;
 import nl.spelberg.util.Utils;
 import org.apache.wicket.Application;
 import org.apache.wicket.protocol.http.WebApplication;

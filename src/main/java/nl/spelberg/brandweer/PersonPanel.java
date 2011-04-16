@@ -1,5 +1,6 @@
 package nl.spelberg.brandweer;
 
+import nl.spelberg.brandweer.model.Person;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.wicket.markup.html.form.Button;
