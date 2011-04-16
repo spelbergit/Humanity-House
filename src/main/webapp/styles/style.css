@@ -3,7 +3,7 @@ body {
     margin-left: 5%;
     margin-right: 5%;
     text-align: center;
-    background-color: black;
+    background-color: #dc143c;
     color: white;
 }
 
@@ -43,4 +43,25 @@ table {
 }
 
 .listTablePager {
+}
+
+.centerPanel {
+    display: block;
+    float: none;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.imagePanel {
+    display: block;
+    float: left;
+}
+
+.personPanel {
+    display: block;
+    float: right;
+}
+
+.personForm table {
+    width: 100%;
 }

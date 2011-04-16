@@ -1,5 +1,6 @@
 package nl.spelberg.brandweer;
 
+import org.apache.wicket.markup.html.AjaxServerAndClientTimeFilter;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +14,8 @@ public class App extends WebApplication {
 
     @Override
     protected void init() {
+        getRequestCycleSettings().addResponseFilter(new AjaxServerAndClientTimeFilter());
+        getDebugSettings().setAjaxDebugModeEnabled(true);
         mountBookmarkablePage("enter", EnterDetailsPage.class);
     }
 }

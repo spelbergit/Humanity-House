@@ -5,11 +5,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import nl.spelberg.util.AbstractVersionedEntity;
 import org.springframework.util.Assert;
 
 @Entity
 @Table(name = "PERSON")
-public class Person {
+public class Person extends AbstractVersionedEntity {
 
     @Id
     private Long id;

@@ -1,0 +1,26 @@
+package nl.spelberg.brandweer;
+
+import org.apache.wicket.Page;
+import org.apache.wicket.markup.html.image.Image;
+import org.apache.wicket.markup.html.link.Link;
+import org.apache.wicket.model.IModel;
+
+/**
+ * TODO: write documentation.
+ */
+public class PersonImagePage extends AbstractPage {
+
+    public PersonImagePage(String title, final Page page, IModel<Person> personModel) {
+        super(title);
+        add(
+                new Link("back") {
+
+                    @Override
+                    public void onClick() {
+                        setResponsePage(page);
+                    }
+
+
+                }.add(new Image("image", new PersonDynamicImageResource(personModel))));
+    }
+}

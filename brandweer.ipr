@@ -49,6 +49,7 @@
             <element id="library" level="project" name="Maven: javassist:javassist:3.9.0.GA" />
             <element id="library" level="project" name="Maven: hsqldb:hsqldb:1.8.0.7" />
             <element id="library" level="project" name="Maven: org.apache.wicket:wicket:1.4.14" />
+            <element id="library" level="project" name="Maven: org.apache.wicket:wicket-extensions:1.4.14" />
             <element id="library" level="project" name="Maven: org.apache.wicket:wicket-spring:1.4.14" />
             <element id="library" level="project" name="Maven: org.apache.wicket:wicket-ioc:1.4.14" />
             <element id="library" level="project" name="Maven: cglib:cglib-nodep:2.1_3" />
@@ -158,17 +159,21 @@
         <inspection_tool class="HtmlUnknownTag" enabled="true" level="WARNING" enabled_by_default="true">
           <option name="myValues">
             <value>
-              <list size="6">
+              <list size="7">
                 <item index="0" class="java.lang.String" itemvalue="nobr" />
                 <item index="1" class="java.lang.String" itemvalue="noembed" />
                 <item index="2" class="java.lang.String" itemvalue="comment" />
                 <item index="3" class="java.lang.String" itemvalue="noscript" />
                 <item index="4" class="java.lang.String" itemvalue="wicket:extend" />
                 <item index="5" class="java.lang.String" itemvalue="wicket:child" />
+                <item index="6" class="java.lang.String" itemvalue="wicket:panel" />
               </list>
             </value>
           </option>
           <option name="myCustomValuesEnabled" value="true" />
+        </inspection_tool>
+        <inspection_tool class="RequiredAttributes" enabled="true" level="WARNING" enabled_by_default="true">
+          <option name="myAdditionalRequiredHtmlAttributes" value="action,alt,src" />
         </inspection_tool>
         <inspection_tool class="SpellCheckingInspection" enabled="false" level="TYPO" enabled_by_default="false">
           <option name="processCode" value="true" />
@@ -348,6 +353,13 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
   </component>
+  <component name="WebContextManager">
+    <option name="state">
+      <map>
+        <entry key="file://$PROJECT_DIR$/src/main/resources/nl/spelberg/brandweer" value="file://$PROJECT_DIR$/src/main/webapp" />
+      </map>
+    </option>
+  </component>
   <component name="WebServicesPlugin" addRequiredLibraries="true" />
   <component name="libraryTable">
     <library name="Maven: antlr:antlr:2.7.6">
@@ -493,6 +505,17 @@
         <root url="jar://$MAVEN_REPOSITORY$/junit/junit/4.8.1/junit-4.8.1-sources.jar!/" />
       </SOURCES>
     </library>
+    <library name="Maven: org.apache.wicket:wicket-extensions:1.4.14">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/wicket/wicket-extensions/1.4.14/wicket-extensions-1.4.14.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/wicket/wicket-extensions/1.4.14/wicket-extensions-1.4.14-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/apache/wicket/wicket-extensions/1.4.14/wicket-extensions-1.4.14-sources.jar!/" />
+      </SOURCES>
+    </library>
     <library name="Maven: org.apache.wicket:wicket-ioc:1.4.14">
       <CLASSES>
         <root url="jar://$MAVEN_REPOSITORY$/org/apache/wicket/wicket-ioc/1.4.14/wicket-ioc-1.4.14.jar!/" />
@@ -579,6 +602,17 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate-entitymanager/3.5.1-Final/hibernate-entitymanager-3.5.1-Final-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.mockito:mockito-all:1.8.5">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/mockito/mockito-all/1.8.5/mockito-all-1.8.5.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/mockito/mockito-all/1.8.5/mockito-all-1.8.5-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/mockito/mockito-all/1.8.5/mockito-all-1.8.5-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: org.slf4j:slf4j-api:1.5.8">
