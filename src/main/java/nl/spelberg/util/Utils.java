@@ -2,8 +2,17 @@ package nl.spelberg.util;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileFilter;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
+import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
+import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
 
 /*
  * The contents of this file are subject to the terms
@@ -34,6 +43,10 @@ import java.io.InputStream;
 
 public class Utils {
 
+    public static byte[] getBytes(String path) throws IOException {
+        return getBytes(new FileInputStream(path));
+    }
+
     @SuppressWarnings({"UnusedAssignment"})
     public static byte[] getBytes(InputStream is) throws IOException {
 
@@ -57,4 +70,25 @@ public class Utils {
     }
 
 
+    public static SortedSet<String> getFileNames(String directory, String... extensions) {
+        File dir = new File(directory);
+        Assert.isTrue(dir.isDirectory(), "Geen bestaande directory: '" + directory + "'");
+
+        final List<String> extList = Arrays.asList(extensions);
+
+        File[] files = dir.listFiles(
+                new FileFilter() {
+                    @Override
+                    public boolean accept(File file) {
+                        return file.isFile() && extList.contains(StringUtils.getFilenameExtension(file.getPath()));
+                    }
+                });
+
+        SortedSet<String> sortedFiles = new TreeSet<String>();
+        for (File f : files) {
+            sortedFiles.add(f.getName());
+        }
+
+        return sortedFiles;
+    }
 }

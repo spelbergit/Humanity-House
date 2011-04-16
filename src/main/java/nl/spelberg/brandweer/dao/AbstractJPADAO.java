@@ -4,8 +4,6 @@ import java.io.Serializable;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 import nl.spelberg.util.ReflectionUtils;
 
 public abstract class AbstractJPADAO<ID extends Serializable, T> implements JPADAO<ID, T> {
@@ -48,11 +46,8 @@ public abstract class AbstractJPADAO<ID extends Serializable, T> implements JPAD
         em.remove(entity);
     }
 
-    protected final Query namedQuery(String queryName) {
-        return em.createNamedQuery(queryName);
+    protected final EntityManager em() {
+        return em;
     }
 
-    protected final TypedQuery<T> namedTypedQuery(String queryName) {
-        return em.createNamedQuery(queryName, entityClass);
-    }
 }

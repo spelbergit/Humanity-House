@@ -1,18 +1,31 @@
 package nl.spelberg.brandweer.model;
 
-import java.util.Arrays;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 import nl.spelberg.util.AbstractVersioned;
 import org.springframework.util.Assert;
 
 @Entity
 @Table(name = "PERSON")
+@TableGenerator(name = "PERSON_GEN", table = "SEQUENCE_TABLE", pkColumnName = "SEQ_NAME",
+                valueColumnName = "SEQ_COUNT", pkColumnValue = "PERSON_SEQ")
+@NamedQueries({@NamedQuery(
+        name = "Person.findMostRecent",
+        query = "from Person order by photo.lastModified desc"), @NamedQuery(
+        name = "Person.findByPhoto",
+        query = "from Person where photo.name = :photoName")})
 public class Person extends AbstractVersioned {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "PERSON_GEN")
     private Long id;
 
     @Column
@@ -21,15 +34,8 @@ public class Person extends AbstractVersioned {
     @Column
     private String email;
 
-    @Column
-    private String fotoName;
-
-    @Column
-    private String fotoType;
-
-    @Column
-    private byte[] fotoData;
-
+    @Embedded
+    private Photo photo;
 
     /**
      * For JPA.
@@ -38,62 +44,35 @@ public class Person extends AbstractVersioned {
     protected Person() {
     }
 
-    public Person(Long id) {
-        this.id = id;
-    }
-
-    public Person(String name, String email, String fotoName, String fotoType, byte[] fotoData) {
+    public Person(String name, String email, Photo photo) {
         Assert.notNull(name, "name is null");
         Assert.notNull(email, "email is null");
-        Assert.notNull(fotoName, "foto is null");
-        Assert.notNull(fotoType, "fotoType is null");
-        Assert.notNull(fotoData, "fotoData is null");
+        Assert.notNull(photo, "foto is null");
         this.name = name;
         this.email = email;
-        this.fotoName = fotoName;
-        this.fotoType = fotoType.toLowerCase();
-        this.fotoData = fotoData;
-        validateFields();
+        this.photo = photo;
     }
 
-    public Person(String fotoName, String fotoType, byte[] fotoData) {
-        Assert.notNull(fotoName, "foto is null");
-        Assert.notNull(fotoType, "fotoType is null");
-        Assert.notNull(fotoData, "fotoData is null");
-        this.fotoName = fotoName;
-        this.fotoType = fotoType;
-        this.fotoData = fotoData;
-        validateFields();
+    public Person(Photo photo) {
+        Assert.notNull(photo, "foto is null");
+        this.photo = photo;
     }
 
-    private void validateFields() {
-        Assert.isTrue(Arrays.asList("jpg", "png", "gif").contains(this.fotoType));
-    }
-
-    public Long getId() {
+    public Long id() {
         return id;
     }
 
-    public String getName() {
+    public String name() {
         return name;
     }
 
-    public String getEmail() {
+    public String email() {
         return email;
     }
 
-    public String getFotoName() {
-        return fotoName;
+    public Photo foto() {
+        return photo;
     }
-
-    public String getFotoType() {
-        return fotoType;
-    }
-
-    public byte[] getFotoData() {
-        return fotoData;
-    }
-
 
     @Override
     public String toString() {
@@ -102,8 +81,7 @@ public class Person extends AbstractVersioned {
         sb.append("{id=").append(id);
         sb.append(", name='").append(name).append('\'');
         sb.append(", email='").append(email).append('\'');
-        sb.append(", fotoName='").append(fotoName).append('\'');
-        sb.append(", fotoType='").append(fotoType).append('\'');
+        sb.append(", foto='").append(photo).append('\'');
         sb.append('}');
         return sb.toString();
     }

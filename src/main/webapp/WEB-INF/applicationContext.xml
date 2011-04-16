@@ -39,4 +39,8 @@
         <property name="generateDdl" value="${jpa.generateDdl}"/>
     </bean>
 
+    <bean class="nl.spelberg.brandweer.model.BrandweerConfig">
+        <property name="fotoDir" value="${brandweer.fotodir}"/>
+    </bean>
+
 </beans>
