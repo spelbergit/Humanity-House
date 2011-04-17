@@ -68,4 +68,18 @@ public class PhotoServiceImpl implements PhotoService {
             throw new RuntimeException("Unable to load photo data for " + photo + "; message: " + e.getMessage(), e);
         }
     }
+
+    @Override
+    public byte[] readFotoThumbnailData(Photo photo) {
+        try {
+            byte[] data = photoCache.getCachedData(photo);
+            if (data == null) {
+                data = Utils.getBytes(photo.path());
+                photoCache.updateCachedData(photo, data);
+            }
+            return data;
+        } catch (IOException e) {
+            throw new RuntimeException("Unable to load photo data for " + photo + "; message: " + e.getMessage(), e);
+        }
+    }
 }

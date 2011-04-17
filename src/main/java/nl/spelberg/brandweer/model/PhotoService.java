@@ -11,4 +11,6 @@ public interface PhotoService {
 
     byte[] readFotoData(Photo photo);
 
+    byte[] readFotoThumbnailData(Photo photo);
+
 }

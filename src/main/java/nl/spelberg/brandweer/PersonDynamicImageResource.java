@@ -11,7 +11,7 @@ public class PersonDynamicImageResource extends DynamicImageResource {
 
     private final PhotoService photoService;
 
-    private IModel<Person> personModel;
+    private final IModel<Person> personModel;
 
     public PersonDynamicImageResource(IModel<Person> personModel, PhotoService photoService) {
         Assert.notNull(personModel, "personModel is null");
@@ -25,5 +25,9 @@ public class PersonDynamicImageResource extends DynamicImageResource {
         Person person = personModel.getObject();
         Photo photo = person.foto();
         return photoService.readFotoData(photo);
+    }
+
+    public Photo getPhoto() {
+        return personModel.getObject().foto();
     }
 }
