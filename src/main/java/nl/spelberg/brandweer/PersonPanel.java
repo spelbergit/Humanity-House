@@ -1,6 +1,7 @@
 package nl.spelberg.brandweer;
 
 import nl.spelberg.brandweer.model.Person;
+import nl.spelberg.brandweer.model.PersonService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.wicket.markup.html.form.Button;
@@ -11,6 +12,7 @@ import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.PropertyModel;
+import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.validation.validator.EmailAddressValidator;
 
 public class PersonPanel extends Panel {
@@ -22,6 +24,9 @@ public class PersonPanel extends Panel {
     }
 
     private static class PersonForm extends Form<Person> {
+
+        @SpringBean
+        private PersonService personService;
 
         public PersonForm(String id, final IModel<Person> personModel) {
             super(id, personModel);
@@ -40,7 +45,9 @@ public class PersonPanel extends Panel {
             Button submitButton = new Button("submit") {
                 @Override
                 public void onSubmit() {
-                    log.info("Person: " + personModel.getObject());
+                    Person person = personModel.getObject();
+                    log.info("Person: " + person);
+                    personService.updatePerson(person);
                     setResponsePage(HomePage.class);
                 }
             };

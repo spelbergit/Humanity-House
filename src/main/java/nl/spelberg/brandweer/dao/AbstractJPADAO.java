@@ -42,6 +42,11 @@ public abstract class AbstractJPADAO<ID extends Serializable, T> implements JPAD
     }
 
     @Override
+    public void update(T entity) {
+        em.merge(entity);
+    }
+
+    @Override
     public final void delete(T entity) {
         em.remove(entity);
     }

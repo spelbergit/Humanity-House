@@ -9,5 +9,7 @@ public interface JPADAO<ID extends Serializable, T> {
 
     void persist(T entity);
 
+    void update(T entity);
+
     void delete(T entity);
 }

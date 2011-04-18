@@ -6,4 +6,5 @@ public interface PersonService {
 
     public Person getMostRecentPerson();
 
+    void updatePerson(Person person);
 }
