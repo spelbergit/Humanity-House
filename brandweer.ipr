@@ -48,6 +48,7 @@
             <element id="library" level="project" name="Maven: asm:asm:3.1" />
             <element id="library" level="project" name="Maven: javassist:javassist:3.9.0.GA" />
             <element id="library" level="project" name="Maven: hsqldb:hsqldb:1.8.0.7" />
+            <element id="library" level="project" name="Maven: postgresql:postgresql:9.0-801.jdbc4" />
             <element id="library" level="project" name="Maven: org.apache.wicket:wicket:1.4.14" />
             <element id="library" level="project" name="Maven: org.apache.wicket:wicket-extensions:1.4.14" />
             <element id="library" level="project" name="Maven: org.apache.wicket:wicket-spring:1.4.14" />
@@ -768,6 +769,17 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/3.0.5.RELEASE/spring-web-3.0.5.RELEASE-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: postgresql:postgresql:9.0-801.jdbc4">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/postgresql/postgresql/9.0-801.jdbc4/postgresql-9.0-801.jdbc4.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/postgresql/postgresql/9.0-801.jdbc4/postgresql-9.0-801.jdbc4-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/postgresql/postgresql/9.0-801.jdbc4/postgresql-9.0-801.jdbc4-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: xml-apis:xml-apis:1.0.b2">
