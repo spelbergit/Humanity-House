@@ -52,6 +52,18 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
+    public boolean hasNewPerson() {
+        Photo mostRecentPhoto = photoService.findMostRecentPhoto();
+        if (mostRecentPhoto != null) {
+            Person person = personDAO.find(mostRecentPhoto);
+            if (person == null) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
     public void updatePerson(Person person) {
         personDAO.update(person);
     }

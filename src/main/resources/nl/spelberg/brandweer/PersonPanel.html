@@ -6,21 +6,18 @@
     <form wicket:id="personForm" id="personForm">
         <table>
             <tr>
-                <td colspan="2">
+                <td><label for="name">Naam:</label></td>
+                <td><input type="text" wicket:id="name" id="name" class="name"/></td>
+                <td>
                     <div wicket:id="feedback">Feedback</div>
                 </td>
             </tr>
             <tr>
-                <td><label for="name">Naam:</label></td>
-                <td><input type="text" wicket:id="name" id="name" class="name"/></td>
-            </tr>
-            <tr>
                 <td><label for="email">Email:</label></td>
-                <td><input type="text" wicket:id="email" class="email"/></td>
+                <td><input type="text" wicket:id="email" id="email" class="email"/></td>
+                <td><input type="submit" wicket:id="submit" value="Verzenden" id="submit"/></td>
             </tr>
-            <tr>
-                <td colspan="2"><input type="submit" wicket:id="submit" value="Verzenden" id="submit"/></td>
-            </tr>
+            <tr></tr>
         </table>
     </form>
 </wicket:panel>

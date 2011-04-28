@@ -44,8 +44,10 @@
         <property name="generateDdl" value="${jpa.generateDdl}"/>
     </bean>
 
-    <bean class="nl.spelberg.brandweer.model.BrandweerConfig">
+    <bean id="brandweerConfig" class="nl.spelberg.brandweer.model.BrandweerConfig">
         <property name="fotoDir" value="${brandweer.fotodir}"/>
+        <property name="maxPhotoSize" value="${brandweer.maxPhotoSize}"/>
+        <property name="logLevel" value="${brandweer.loglevel}"/>
     </bean>
 
 </beans>

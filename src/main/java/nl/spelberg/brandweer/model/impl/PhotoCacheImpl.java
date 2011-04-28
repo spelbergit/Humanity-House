@@ -23,12 +23,16 @@ public class PhotoCacheImpl implements PhotoCache {
     }
 
     @Override
-    public byte[] getCachedThumbnailData(Photo photo) {
-        return thumbnailCache.get(photo.name());
+    public byte[] getCachedThumbnailData(Photo photo, int maxSize) {
+        return thumbnailCache.get(createThumbnailPhotoName(photo, maxSize));
     }
 
     @Override
-    public void updateCachedThumbnailData(Photo photo, byte[] data) {
-        thumbnailCache.put(photo.name(), data);
+    public void updateCachedThumbnailData(Photo photo, int maxSize, byte[] data) {
+        thumbnailCache.put(createThumbnailPhotoName(photo, maxSize), data);
+    }
+
+    private String createThumbnailPhotoName(Photo photo, int maxSize) {
+        return photo.name() + "-" + maxSize;
     }
 }

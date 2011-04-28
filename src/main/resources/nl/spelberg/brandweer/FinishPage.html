@@ -1,0 +1,29 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.3-strict.dtd"
+      xml:lang="en" lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="styles/style.css"/>
+    <wicket:head>
+        <meta http-equiv="refresh" content="60">
+    </wicket:head>
+</head>
+<body>
+<wicket:extend>
+    <h1>Bedankt voor het invullen!</h1>
+    <div class="imagePanel">
+        <img wicket:id="image"/>
+    </div>
+    <div class="personPanel">
+        <table>
+            <tr>
+                <td>Naam:</td>
+                <td><span wicket:id="name"></span></td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td><span wicket:id="email"></span></td>
+            </tr>
+        </table>
+    </div>
+</wicket:extend>
+</body>
+</html>

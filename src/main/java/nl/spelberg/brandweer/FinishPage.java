@@ -5,12 +5,14 @@ import nl.spelberg.brandweer.model.Person;
 import nl.spelberg.brandweer.model.PersonService;
 import nl.spelberg.brandweer.model.PhotoCache;
 import nl.spelberg.brandweer.model.PhotoService;
+import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.model.LoadableDetachableModel;
+import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.springframework.util.Assert;
 
-public class EnterDetailsPage extends AbstractPage {
+public class FinishPage extends AbstractPage {
 
     @SpringBean(name = "brandweerConfig")
     private BrandweerConfig brandweerConfig;
@@ -24,15 +26,16 @@ public class EnterDetailsPage extends AbstractPage {
     @SpringBean
     private PhotoCache photoCache;
 
-    public EnterDetailsPage(Person person) {
+    public FinishPage(Person person) {
         super("Vul je gegevens in");
         Assert.notNull(person, "person is null");
 
         final LoadableDetachableModel<Person> personModel = new PersonLoadableDetachableModel(person, personService);
-        add(new PersonPanel("personPanel", personModel, new FinishPage(person)));
+
+        add(new Label("name", new PropertyModel<String>(personModel, "name")));
+        add(new Label("email", new PropertyModel<String>(personModel, "email")));
 
         add(new Image("image", new PersonThumbnailImageResource(new PersonDynamicImageResource(personModel,
                 photoService), brandweerConfig.getMaxPhotoSize(), photoCache)));
     }
-
 }

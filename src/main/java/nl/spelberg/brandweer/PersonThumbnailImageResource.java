@@ -11,6 +11,8 @@ public class PersonThumbnailImageResource extends ThumbnailImageResource {
 
     private final PhotoCache photoCache;
 
+    private final int maxSize;
+
     public PersonThumbnailImageResource(
             PersonDynamicImageResource personDynamicImageResource, int maxSize, PhotoCache photoCache) {
         super(personDynamicImageResource, maxSize);
@@ -18,16 +20,17 @@ public class PersonThumbnailImageResource extends ThumbnailImageResource {
         Assert.notNull(personDynamicImageResource, "personDynamicImageResource is null");
         this.personDynamicImageResource = personDynamicImageResource;
         this.photoCache = photoCache;
+        this.maxSize = maxSize;
     }
 
     @Override
     protected byte[] getImageData() {
 
         Photo photo = personDynamicImageResource.getPhoto();
-        byte[] data = photoCache.getCachedThumbnailData(photo);
+        byte[] data = photoCache.getCachedThumbnailData(photo, maxSize);
         if (data == null) {
             data = super.getImageData();
-            photoCache.updateCachedThumbnailData(photo, data);
+            photoCache.updateCachedThumbnailData(photo, maxSize, data);
         }
         return data;
 

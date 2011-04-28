@@ -32,18 +32,17 @@ public class PhotoServiceImpl implements PhotoService {
     public Photo findMostRecentPhoto() {
         Set<String> fileNames = Utils.getFileNames(brandweerConfig.getFotoDir(), brandweerConfig.getFotoExtensions());
         if (fileNames.isEmpty()) {
-            throw new IllegalStateException(
-                    "No files with extension " + Arrays.asList(brandweerConfig.getFotoExtensions()) +
-                            " found in dir '" + brandweerConfig.getFotoDir() + "'");
+            log.debug("No files with extension " + Arrays.asList(brandweerConfig.getFotoExtensions()) +
+                    " found in dir '" + brandweerConfig.getFotoDir() + "'");
+            return null;
         }
 
-        SortedSet<Photo> photos = new TreeSet<Photo>(
-                new Comparator<Photo>() {
-                    @Override
-                    public int compare(Photo photo, Photo other) {
-                        return other.lastModified().compareTo(photo.lastModified());
-                    }
-                });
+        SortedSet<Photo> photos = new TreeSet<Photo>(new Comparator<Photo>() {
+            @Override
+            public int compare(Photo photo, Photo other) {
+                return other.lastModified().compareTo(photo.lastModified());
+            }
+        });
 
         for (String fileName : fileNames) {
             Photo photo = new Photo(brandweerConfig.getFotoDir() + File.separator + fileName);

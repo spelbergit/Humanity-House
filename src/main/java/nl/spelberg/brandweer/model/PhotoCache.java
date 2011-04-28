@@ -6,7 +6,7 @@ public interface PhotoCache {
 
     void updateCachedData(Photo photo, byte[] data);
 
-    byte[] getCachedThumbnailData(Photo photo);
+    byte[] getCachedThumbnailData(Photo photo, int maxSize);
 
-    void updateCachedThumbnailData(Photo photo, byte[] data);
+    void updateCachedThumbnailData(Photo photo, int maxSize, byte[] data);
 }
