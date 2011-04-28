@@ -20,7 +20,7 @@ public class App extends WebApplication {
 
         // ajax
         getRequestCycleSettings().addResponseFilter(new AjaxServerAndClientTimeFilter());
-        getDebugSettings().setAjaxDebugModeEnabled(true);
+        getDebugSettings().setAjaxDebugModeEnabled(false);
 
         // nice url's
         mountBookmarkablePage("enter", EnterDetailsPage.class);
