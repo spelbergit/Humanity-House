@@ -3,7 +3,7 @@
         "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-    <display-name>WicketRAD Archetype Created Web Application</display-name>
+    <display-name>Humanity House Brandweer</display-name>
     <!-- The SpringWebApplicationFactory will need access to a Spring Application context, configured like this... -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
