@@ -1,6 +1,5 @@
 package nl.spelberg.brandweer.model.impl;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -45,7 +44,7 @@ public class PhotoServiceImpl implements PhotoService {
         });
 
         for (String fileName : fileNames) {
-            Photo photo = new Photo(brandweerConfig.getFotoDir() + File.separator + fileName);
+            Photo photo = new Photo(brandweerConfig.getFotoDir() + "/" + fileName);
             photos.add(photo);
         }
         Photo photo = photos.iterator().next();
