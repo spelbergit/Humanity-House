@@ -1,5 +1,6 @@
-target
+/target
 *.iws
 *.ids
 /db/brandweer.db.lck
 /db/brandweer.db.log
+/out
