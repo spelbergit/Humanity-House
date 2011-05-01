@@ -40,8 +40,8 @@ public class EnterDetailsPage extends AbstractPage {
         add(new AbstractAjaxTimerBehavior(Duration.seconds(brandweerConfig.getTimingEmail())) {
             @Override
             protected void onTimer(AjaxRequestTarget target) {
-                //                setResponsePage(HomePage.class);
-                //                setRedirect(true);
+                setResponsePage(HomePage.class);
+                setRedirect(true);
             }
         });
 
