@@ -32,7 +32,7 @@ public class EnterDetailsPage extends AbstractPage {
         Assert.notNull(person, "person is null");
 
         final LoadableDetachableModel<Person> personModel = new PersonLoadableDetachableModel(person, personService);
-        add(new PersonPanel("personPanel", personModel, new FinishPage(person)));
+        add(new PersonPanel("personPanel", personModel));
 
         add(new Image("image", new PersonThumbnailImageResource(new PersonDynamicImageResource(personModel,
                 photoService), brandweerConfig.getMaxPhotoSize(), photoCache)));
