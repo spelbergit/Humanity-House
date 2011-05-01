@@ -44,8 +44,8 @@ public class FinishPage extends AbstractPage {
         add(new AbstractAjaxTimerBehavior(Duration.seconds(brandweerConfig.getTimingFinish())) {
             @Override
             protected void onTimer(AjaxRequestTarget target) {
-                //                setResponsePage(HomePage.class);
-                //                setRedirect(true);
+                setResponsePage(HomePage.class);
+                setRedirect(true);
             }
         });
     }
