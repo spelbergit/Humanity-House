@@ -30,23 +30,16 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Person getMostRecentPerson() {
-
         // check if there is a new photo
         Photo mostRecentPhoto = photoService.findMostRecentPhoto();
-
         Person person = personDAO.find(mostRecentPhoto);
-
         if (person == null) {
-
             // new photo detected, create person
             Person newPerson = new Person(mostRecentPhoto);
             personDAO.persist(newPerson);
-            log.info("Most Recent Person created: " + person);
+            log.info("Nieuwe foto: " + mostRecentPhoto.path());
             return newPerson;
-
         } else {
-
-            log.info("Most Recent Person already exists: " + person);
             return person;
         }
     }
@@ -66,6 +59,7 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public void updatePerson(Person person) {
         personDAO.update(person);
+        log.info("Gegevens bijgewerkt: " + person);
     }
 
 }

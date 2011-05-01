@@ -2,6 +2,7 @@ package nl.spelberg.brandweer;
 
 import nl.spelberg.brandweer.model.Person;
 import nl.spelberg.brandweer.model.PersonService;
+import nl.spelberg.util.wicket.DefaultFocusBehavior;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.wicket.Page;
@@ -40,9 +41,10 @@ public class PersonPanel extends Panel {
 
             FeedbackPanel feedbackPanel = new FeedbackPanel("feedback");
 
-            RequiredTextField<String> nameTextField = new RequiredTextField<String>("name", new PropertyModel<String>(
+            RequiredTextField<String> nameTextField = new RequiredTextField<String>("Naam", new PropertyModel<String>(
                     personModel, "name"));
-            FormComponent<String> emailTextField = new RequiredTextField<String>("email", new PropertyModel<String>(
+            nameTextField.add(new DefaultFocusBehavior());
+            FormComponent<String> emailTextField = new RequiredTextField<String>("Email", new PropertyModel<String>(
                     personModel, "email"));
             emailTextField.add(EmailAddressValidator.getInstance());
             Button submitButton = new Button("submit") {

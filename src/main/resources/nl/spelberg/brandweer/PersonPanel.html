@@ -3,21 +3,35 @@
 <head></head>
 <body>
 <wicket:panel>
-    <form wicket:id="personForm" id="personForm">
+    <form wicket:id="personForm" id="personForm" class="personForm">
         <table>
             <tr>
                 <td><label for="name">Naam:</label></td>
-                <td><input type="text" wicket:id="name" id="name" class="name"/></td>
-                <td>
-                    <div wicket:id="feedback">Feedback</div>
-                </td>
+                <td><input type="text" wicket:id="Naam" id="name" class="name" size="40"/></td>
+                <td class="tablefiller"></td>
             </tr>
             <tr>
                 <td><label for="email">Email:</label></td>
-                <td><input type="text" wicket:id="email" id="email" class="email"/></td>
-                <td><input type="submit" wicket:id="submit" value="Verzenden" id="submit"/></td>
+                <td><input type="text" wicket:id="Email" id="email" class="email" size="40"/></td>
+                <td class="tablefiller"></td>
             </tr>
-            <tr></tr>
+            <tr>
+                <td colspan="3" class="tablefiller">&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" wicket:id="submit" value="Verzenden" id="submit" class="button"/>
+                </td>
+                <td class="tablefiller"></td>
+            </tr>
+            <tr>
+                <td colspan="3" class="tablefiller">&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div wicket:id="feedback">Feedback</div>
+                </td>
+                <td class="tablefiller"></td>
+            </tr>
         </table>
     </form>
 </wicket:panel>

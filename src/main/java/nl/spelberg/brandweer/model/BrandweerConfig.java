@@ -2,6 +2,9 @@ package nl.spelberg.brandweer.model;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Level;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.util.StringUtils;
 
@@ -14,7 +17,16 @@ public class BrandweerConfig {
     private String fotoDir;
 
     private int maxPhotoSize;
+
+    private int timingHome;
+    private int timingEmail;
+    private int timingFinish;
+
     private String logLevel;
+
+    public BrandweerConfig() {
+        Logger.getLogger(getClass()).setLevel(Level.INFO);
+    }
 
     public String getFotoDir() {
         return fotoDir;
@@ -23,6 +35,7 @@ public class BrandweerConfig {
     @Required
     public void setFotoDir(String fotoDir) {
         this.fotoDir = StringUtils.cleanPath(fotoDir);
+        logConfig("fotoDir=" + this.fotoDir);
     }
 
     public int getMaxPhotoSize() {
@@ -32,10 +45,49 @@ public class BrandweerConfig {
     @Required
     public void setMaxPhotoSize(int maxPhotoSize) {
         this.maxPhotoSize = maxPhotoSize;
+        logConfig("maxPhotoSize=" + this.maxPhotoSize);
+    }
+
+    public int getTimingHome() {
+        return timingHome;
+    }
+
+    @Required
+    public void setTimingHome(int timingHome) {
+        this.timingHome = timingHome;
+        logConfig("timingHome=" + this.timingHome);
+    }
+
+    public int getTimingEmail() {
+        return timingEmail;
+    }
+
+    @Required
+    public void setTimingEmail(int timingEmail) {
+        this.timingEmail = timingEmail;
+        logConfig("timingEmail=" + this.timingEmail);
+    }
+
+    public int getTimingFinish() {
+        return timingFinish;
+    }
+
+    @Required
+    public void setTimingFinish(int timingFinish) {
+        this.timingFinish = timingFinish;
+        logConfig("timingFinish=" + this.timingFinish);
     }
 
     public void setLogLevel(String logLevel) {
         this.logLevel = logLevel;
+        // configure log4j
+        Logger brandweerLogger = LogManager.getLogger("nl.spelberg");
+        brandweerLogger.setLevel(Level.toLevel(logLevel));
+        logConfig("Log level set: " + brandweerLogger.getName() + ".level=" + brandweerLogger.getLevel());
+    }
+
+    private void logConfig(String message) {
+        log.info(message);
     }
 
 

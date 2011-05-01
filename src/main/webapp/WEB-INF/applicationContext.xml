@@ -47,6 +47,9 @@
     <bean id="brandweerConfig" class="nl.spelberg.brandweer.model.BrandweerConfig">
         <property name="fotoDir" value="${brandweer.fotodir}"/>
         <property name="maxPhotoSize" value="${brandweer.maxPhotoSize}"/>
+        <property name="timingHome" value="${brandweer.timing.home}"/>
+        <property name="timingEmail" value="${brandweer.timing.email}"/>
+        <property name="timingFinish" value="${brandweer.timing.finish}"/>
         <property name="logLevel" value="${brandweer.loglevel}"/>
     </bean>
 

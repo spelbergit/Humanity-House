@@ -54,7 +54,8 @@
             <element id="library" level="project" name="Maven: org.apache.wicket:wicket-spring:1.4.14" />
             <element id="library" level="project" name="Maven: org.apache.wicket:wicket-ioc:1.4.14" />
             <element id="library" level="project" name="Maven: cglib:cglib-nodep:2.1_3" />
-            <element id="library" level="project" name="Maven: org.slf4j:slf4j-simple:1.5.2" />
+            <element id="library" level="project" name="Maven: org.slf4j:slf4j-log4j12:1.5.2" />
+            <element id="library" level="project" name="Maven: log4j:log4j:1.2.16" />
           </element>
         </element>
       </root>
@@ -104,6 +105,8 @@
             <element id="library" level="project" name="Maven: org.apache.wicket:wicket-ioc:1.4.14" />
             <element id="library" level="project" name="Maven: cglib:cglib-nodep:2.1_3" />
             <element id="library" level="project" name="Maven: org.slf4j:slf4j-simple:1.5.2" />
+            <element id="library" level="project" name="Maven: org.slf4j:slf4j-log4j12:1.5.2" />
+            <element id="library" level="project" name="Maven: log4j:log4j:1.2.16" />
           </element>
         </element>
         <element id="javaee-facet-resources" facet="brandweer/web/Web" />
@@ -558,6 +561,17 @@
         <root url="jar://$MAVEN_REPOSITORY$/junit/junit/4.8.1/junit-4.8.1-sources.jar!/" />
       </SOURCES>
     </library>
+    <library name="Maven: log4j:log4j:1.2.16">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/log4j/log4j/1.2.16/log4j-1.2.16.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/log4j/log4j/1.2.16/log4j-1.2.16-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/log4j/log4j/1.2.16/log4j-1.2.16-sources.jar!/" />
+      </SOURCES>
+    </library>
     <library name="Maven: org.apache.wicket:wicket-extensions:1.4.14">
       <CLASSES>
         <root url="jar://$MAVEN_REPOSITORY$/org/apache/wicket/wicket-extensions/1.4.14/wicket-extensions-1.4.14.jar!/" />
@@ -679,15 +693,15 @@
         <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.5.8/slf4j-api-1.5.8-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.slf4j:slf4j-simple:1.5.2">
+    <library name="Maven: org.slf4j:slf4j-log4j12:1.5.2">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-simple/1.5.2/slf4j-simple-1.5.2.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-log4j12/1.5.2/slf4j-log4j12-1.5.2.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-simple/1.5.2/slf4j-simple-1.5.2-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-log4j12/1.5.2/slf4j-log4j12-1.5.2-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-simple/1.5.2/slf4j-simple-1.5.2-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-log4j12/1.5.2/slf4j-log4j12-1.5.2-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: org.springframework:spring-aop:3.0.5.RELEASE">

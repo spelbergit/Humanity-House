@@ -37,11 +37,11 @@ public class EnterDetailsPage extends AbstractPage {
         add(new Image("image", new PersonThumbnailImageResource(new PersonDynamicImageResource(personModel,
                 photoService), brandweerConfig.getMaxPhotoSize(), photoCache)));
 
-        add(new AbstractAjaxTimerBehavior(Duration.minutes(5)) {
+        add(new AbstractAjaxTimerBehavior(Duration.seconds(brandweerConfig.getTimingEmail())) {
             @Override
             protected void onTimer(AjaxRequestTarget target) {
-                setResponsePage(HomePage.class);
-                setRedirect(true);
+                //                setResponsePage(HomePage.class);
+                //                setRedirect(true);
             }
         });
 

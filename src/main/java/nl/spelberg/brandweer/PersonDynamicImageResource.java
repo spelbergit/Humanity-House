@@ -15,6 +15,7 @@ public class PersonDynamicImageResource extends DynamicImageResource {
 
     public PersonDynamicImageResource(IModel<Person> personModel, PhotoService photoService) {
         Assert.notNull(personModel, "personModel is null");
+        Assert.notNull(personModel.getObject(), "personModel.getObject() is null");
         Assert.notNull(photoService, "photoService is null");
         this.personModel = personModel;
         this.photoService = photoService;

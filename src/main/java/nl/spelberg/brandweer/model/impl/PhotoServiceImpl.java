@@ -49,7 +49,7 @@ public class PhotoServiceImpl implements PhotoService {
         }
         Photo photo = photos.iterator().next();
 
-        log.info("Most recent photo: " + photo);
+        log.debug("Most recent photo: " + photo);
         return photo;
     }
 

@@ -41,11 +41,11 @@ public class FinishPage extends AbstractPage {
         add(new Image("image", new PersonThumbnailImageResource(new PersonDynamicImageResource(personModel,
                 photoService), brandweerConfig.getMaxPhotoSize(), photoCache)));
 
-        add(new AbstractAjaxTimerBehavior(Duration.ONE_MINUTE) {
+        add(new AbstractAjaxTimerBehavior(Duration.seconds(brandweerConfig.getTimingFinish())) {
             @Override
             protected void onTimer(AjaxRequestTarget target) {
-                setResponsePage(HomePage.class);
-                setRedirect(true);
+                //                setResponsePage(HomePage.class);
+                //                setRedirect(true);
             }
         });
     }
