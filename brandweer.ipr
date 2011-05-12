@@ -237,8 +237,8 @@
           <option name="processLiterals" value="true" />
           <option name="processComments" value="true" />
         </inspection_tool>
-        <inspection_tool class="WicketForgeHtmlIdInspection" enabled="true" level="ERROR" enabled_by_default="true" />
-        <inspection_tool class="WicketForgeJavaIdInspection" enabled="true" level="ERROR" enabled_by_default="true" />
+        <inspection_tool class="WicketForgeHtmlIdInspection" enabled="true" level="SERVER PROBLEM" enabled_by_default="true" />
+        <inspection_tool class="WicketForgeJavaIdInspection" enabled="true" level="SERVER PROBLEM" enabled_by_default="true" />
       </profile>
     </profiles>
     <option name="PROJECT_PROFILE" value="Project Default" />

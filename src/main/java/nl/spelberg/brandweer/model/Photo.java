@@ -31,13 +31,13 @@ public class Photo {
     }
 
     public Photo(String path) {
+        path = StringUtils.cleanPath(path);
 
         String filenameExt = StringUtils.getFilename(path);
         String ext = StringUtils.getFilenameExtension(filenameExt);
         Assert.notNull(ext, "Foto heeft geen extensie (jpg, png, gif): '" + path + "'");
         ext = ext.toLowerCase();
-        Assert.isTrue(
-                Arrays.asList("jpg", "png", "gif").contains(ext),
+        Assert.isTrue(Arrays.asList("jpg", "png", "gif").contains(ext),
                 "Foto heeft geen valide extensie (jpg, png, gif): '" + path + "'");
         File file = new File(path);
 
@@ -74,4 +74,15 @@ public class Photo {
         sb.append('}');
         return sb.toString();
     }
+
+    public static String format(Photo photo) {
+        String[] pathElements = StringUtils.tokenizeToStringArray(photo.path(), "/");
+        String localDir = pathElements[pathElements.length - 2];
+
+        String name = photo.name();
+        String fotoNumber = name.substring("IMG".length());
+
+        return "HumanityHouse-" + localDir + "_" + fotoNumber + "." + photo.type();
+    }
+
 }

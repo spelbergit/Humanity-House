@@ -16,12 +16,13 @@ import org.springframework.util.Assert;
 @Entity
 @Table(name = "PERSON")
 @TableGenerator(name = "PERSON_GEN", table = "SEQUENCE_TABLE", pkColumnName = "SEQ_NAME",
-                valueColumnName = "SEQ_COUNT", pkColumnValue = "PERSON_SEQ")
-@NamedQueries({@NamedQuery(
-        name = "Person.findMostRecent",
-        query = "from Person order by photo.lastModified desc"), @NamedQuery(
-        name = "Person.findByPhoto",
-        query = "from Person where photo.name = :photoName")})
+        valueColumnName = "SEQ_COUNT", pkColumnValue = "PERSON_SEQ")
+@NamedQueries({
+        @NamedQuery(name = "Person.all", query = "from Person order by photo.lastModified desc"),
+        @NamedQuery(name = "Person.findMostRecent",
+                query = "from Person order by photo.lastModified desc"), @NamedQuery(
+                name = "Person.findByPhoto",
+                query = "from Person where photo.name = :photoName")})
 public class Person extends AbstractVersioned {
 
     @Id

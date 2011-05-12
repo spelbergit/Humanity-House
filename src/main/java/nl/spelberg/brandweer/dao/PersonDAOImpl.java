@@ -1,5 +1,6 @@
 package nl.spelberg.brandweer.dao;
 
+import java.util.List;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import nl.spelberg.brandweer.model.Person;
@@ -25,6 +26,13 @@ public class PersonDAOImpl extends AbstractJPADAO<Long, Person> implements Perso
         } catch (NoResultException e) {
             return null;
         }
+    }
+
+    @Override
+    public List<Person> all() {
+        TypedQuery<Person> query = em().createNamedQuery("Person.all", Person.class);
+        query.setMaxResults(1);
+        return query.getResultList();
     }
 
 }
