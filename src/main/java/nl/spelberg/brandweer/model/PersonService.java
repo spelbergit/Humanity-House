@@ -14,4 +14,6 @@ public interface PersonService {
     boolean hasNewPerson();
 
     void updatePerson(Person person);
+
+    Long countPersons();
 }

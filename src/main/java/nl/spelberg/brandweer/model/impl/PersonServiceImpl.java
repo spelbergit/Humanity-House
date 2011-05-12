@@ -62,4 +62,9 @@ public class PersonServiceImpl implements PersonService {
         log.info("Gegevens bijgewerkt: " + person);
     }
 
+    @Override
+    public Long countPersons() {
+        return personDAO.count();
+    }
+
 }

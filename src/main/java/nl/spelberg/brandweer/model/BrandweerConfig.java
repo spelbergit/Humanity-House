@@ -16,8 +16,9 @@ public class BrandweerConfig {
 
     private String fotoDir;
 
-    private int maxPhotoSize;
+    private String imagePrefix;
 
+    private int maxPhotoSize;
     private int timingHome;
     private int timingEmail;
     private int timingFinish;
@@ -36,6 +37,16 @@ public class BrandweerConfig {
     public void setFotoDir(String fotoDir) {
         this.fotoDir = StringUtils.cleanPath(fotoDir);
         logConfig("fotoDir=" + this.fotoDir);
+    }
+
+    public String getImagePrefix() {
+        return imagePrefix;
+    }
+
+    @Required
+    public void setImagePrefix(String imagePrefix) {
+        this.imagePrefix = imagePrefix;
+        logConfig("imagePrefix=" + this.fotoDir);
     }
 
     public int getMaxPhotoSize() {

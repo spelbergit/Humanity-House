@@ -11,4 +11,6 @@ public interface PersonDAO extends JPADAO<Long, Person> {
     Person find(Photo photo);
 
     List<Person> all();
+
+    Long count();
 }

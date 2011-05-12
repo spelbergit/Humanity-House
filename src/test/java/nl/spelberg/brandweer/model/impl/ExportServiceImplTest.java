@@ -2,6 +2,7 @@ package nl.spelberg.brandweer.model.impl;
 
 import java.util.Arrays;
 import nl.spelberg.brandweer.dao.PersonDAO;
+import nl.spelberg.brandweer.model.BrandweerConfig;
 import nl.spelberg.brandweer.model.Person;
 import nl.spelberg.brandweer.model.Photo;
 import org.junit.Test;
@@ -16,6 +17,9 @@ import static org.mockito.Mockito.*;
 public class ExportServiceImplTest {
 
     @Mock
+    BrandweerConfig brandweerConfig;
+
+    @Mock
     private PersonDAO personDAO;
 
     @InjectMocks
@@ -24,18 +28,22 @@ public class ExportServiceImplTest {
     @Test
     public void testExportAsCsv() {
 
+        when(brandweerConfig.getImagePrefix()).thenReturn("IMG");
+
         Person chris = mockPerson(1L, "Chris", "chris@hh.com", new Photo(
                 "C:\\Documents and Settings\\hh\\Afbeeldingen\\DenHaag\\IMG00001.JPG"));
-        Person ditmar = mockPerson(2L, "Ditmar", "ditmar@hh.com", new Photo(
+        Person ditmar = mockPerson(2L, "Ditmar van Dam", "ditmar@hh.com", new Photo(
                 "C:\\Documents and Settings\\hh\\Afbeeldingen\\DenHaag\\IMG00002.JPG"));
-        when(personDAO.all()).thenReturn(Arrays.asList(chris, ditmar));
+        Person et = mockPerson(3L, "Enfant Terrible", "et@mail.com", new Photo("IMG00003.JPG"));
+        when(personDAO.all()).thenReturn(Arrays.asList(chris, ditmar, et));
 
         String csv = exportService.exportAsCsv();
 
         String expectedCsv = "";
         expectedCsv += "ID,Naam,Email,Foto\r\n";
         expectedCsv += "1,Chris,chris@hh.com,HumanityHouse-DenHaag_00001.jpg\r\n";
-        expectedCsv += "2,Ditmar,ditmar@hh.com,HumanityHouse-DenHaag_00002.jpg\r\n";
+        expectedCsv += "2,\"Ditmar van Dam\",ditmar@hh.com,HumanityHouse-DenHaag_00002.jpg\r\n";
+        expectedCsv += "3,\"Enfant Terrible\",et@mail.com,HumanityHouse-00003.jpg\r\n";
 
         assertEquals(expectedCsv, csv);
     }

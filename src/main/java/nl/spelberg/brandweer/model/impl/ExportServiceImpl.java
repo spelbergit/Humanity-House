@@ -4,9 +4,9 @@ import com.mindprod.csv.CSVWriter;
 import java.io.StringWriter;
 import java.util.List;
 import nl.spelberg.brandweer.dao.PersonDAO;
+import nl.spelberg.brandweer.model.BrandweerConfig;
 import nl.spelberg.brandweer.model.ExportService;
 import nl.spelberg.brandweer.model.Person;
-import nl.spelberg.brandweer.model.Photo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("exportService")
 @Transactional
 public class ExportServiceImpl implements ExportService {
+
+    @Autowired
+    BrandweerConfig brandweerConfig;
 
     @Autowired
     PersonDAO personDAO;
@@ -36,7 +39,7 @@ public class ExportServiceImpl implements ExportService {
             csvWriter.put(String.valueOf(person.id()));
             csvWriter.put(person.name());
             csvWriter.put(person.email());
-            csvWriter.put(Photo.format(person.foto()));
+            csvWriter.put(person.foto().asHumanityHouseName(brandweerConfig.getImagePrefix()));
             csvWriter.nl();
         }
 

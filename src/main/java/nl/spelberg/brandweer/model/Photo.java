@@ -75,14 +75,20 @@ public class Photo {
         return sb.toString();
     }
 
-    public static String format(Photo photo) {
-        String[] pathElements = StringUtils.tokenizeToStringArray(photo.path(), "/");
-        String localDir = pathElements[pathElements.length - 2];
+    public String asHumanityHouseName(String imagePrefix) {
+        String[] pathElements = StringUtils.tokenizeToStringArray(path(), "/");
+        String localDir = pathElements.length > 1 ? pathElements[pathElements.length - 2] + "_" : "";
 
-        String name = photo.name();
-        String fotoNumber = name.substring("IMG".length());
+        String fotoNumber = stripPrefix(name(), imagePrefix);
 
-        return "HumanityHouse-" + localDir + "_" + fotoNumber + "." + photo.type();
+        return "HumanityHouse-" + localDir + fotoNumber + "." + type();
     }
 
+    private String stripPrefix(String s, String prefix) {
+        if (s.startsWith(prefix)) {
+            return s.substring(prefix.length());
+        } else {
+            return s;
+        }
+    }
 }

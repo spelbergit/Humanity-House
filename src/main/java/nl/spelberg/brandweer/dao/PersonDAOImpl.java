@@ -31,8 +31,13 @@ public class PersonDAOImpl extends AbstractJPADAO<Long, Person> implements Perso
     @Override
     public List<Person> all() {
         TypedQuery<Person> query = em().createNamedQuery("Person.all", Person.class);
-        query.setMaxResults(1);
         return query.getResultList();
+    }
+
+    @Override
+    public Long count() {
+        TypedQuery<Long> query = em().createNamedQuery("Person.count", Long.class);
+        return query.getSingleResult();
     }
 
 }

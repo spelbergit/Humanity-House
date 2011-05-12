@@ -108,6 +108,7 @@
             <element id="library" level="project" name="Maven: org.slf4j:slf4j-simple:1.5.2" />
             <element id="library" level="project" name="Maven: org.slf4j:slf4j-log4j12:1.5.2" />
             <element id="library" level="project" name="Maven: log4j:log4j:1.2.16" />
+            <element id="library" level="project" name="Maven: csv:csv:20" />
           </element>
         </element>
         <element id="javaee-facet-resources" facet="brandweer/web/Web" />
@@ -180,11 +181,12 @@
   <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" />
   <component name="EntryPointsManager">
     <entry_points version="2.0" />
-    <list size="4">
+    <list size="5">
       <item index="0" class="java.lang.String" itemvalue="javax.persistence.Column" />
       <item index="1" class="java.lang.String" itemvalue="javax.persistence.Id" />
       <item index="2" class="java.lang.String" itemvalue="org.apache.wicket.spring.injection.annot.SpringBean" />
-      <item index="3" class="java.lang.String" itemvalue="org.springframework.beans.factory.annotation.Autowired" />
+      <item index="3" class="java.lang.String" itemvalue="org.mockito.Mock" />
+      <item index="4" class="java.lang.String" itemvalue="org.springframework.beans.factory.annotation.Autowired" />
     </list>
   </component>
   <component name="FacetAutodetectingManager">
@@ -215,7 +217,7 @@
         <inspection_tool class="HtmlUnknownTag" enabled="true" level="WARNING" enabled_by_default="true">
           <option name="myValues">
             <value>
-              <list size="8">
+              <list size="9">
                 <item index="0" class="java.lang.String" itemvalue="nobr" />
                 <item index="1" class="java.lang.String" itemvalue="noembed" />
                 <item index="2" class="java.lang.String" itemvalue="comment" />
@@ -224,6 +226,7 @@
                 <item index="5" class="java.lang.String" itemvalue="wicket:child" />
                 <item index="6" class="java.lang.String" itemvalue="wicket:panel" />
                 <item index="7" class="java.lang.String" itemvalue="wicket:head" />
+                <item index="8" class="java.lang.String" itemvalue="wicket:link" />
               </list>
             </value>
           </option>
