@@ -23,7 +23,7 @@ public class BrandweerConfig {
     private int timingEmail;
     private int timingFinish;
 
-    private String logLevel;
+    private String logLevel = Level.INFO.toString();
 
     public BrandweerConfig() {
         Logger.getLogger(getClass()).setLevel(Level.INFO);

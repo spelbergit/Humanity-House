@@ -9,11 +9,6 @@
         </layout>
     </appender>
 
-    <category name="nl.spelberg">
-        <level value="INFO"/>
-        <appender-ref ref="console"/>
-    </category>
-
     <root>
         <priority value="error"/>
         <appender-ref ref="console"/>
