@@ -1,5 +1,6 @@
 package nl.spelberg.brandweer;
 
+import nl.spelberg.brandweer.admin.AdminPage;
 import org.apache.wicket.markup.html.AjaxServerAndClientTimeFilter;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
@@ -24,5 +25,6 @@ public class App extends WebApplication {
 
         // nice url's
         mountBookmarkablePage("enter", EnterDetailsPage.class);
+        mountBookmarkablePage("admin", AdminPage.class);
     }
 }

@@ -64,6 +64,11 @@
             <version>${spring.version}</version>
         </dependency>
         <dependency>
+            <groupId>csv</groupId>
+            <artifactId>csv</artifactId>
+            <version>20</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
             <version>${spring.version}</version>

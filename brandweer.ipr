@@ -29,6 +29,7 @@
             <element id="library" level="project" name="Maven: org.springframework:spring-aop:3.0.5.RELEASE" />
             <element id="library" level="project" name="Maven: org.springframework:spring-expression:3.0.5.RELEASE" />
             <element id="library" level="project" name="Maven: org.springframework:spring-context-support:3.0.5.RELEASE" />
+            <element id="library" level="project" name="Maven: csv:csv:20" />
             <element id="library" level="project" name="Maven: org.springframework:spring-tx:3.0.5.RELEASE" />
             <element id="library" level="project" name="Maven: org.springframework:spring-orm:3.0.5.RELEASE" />
             <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:3.0.5.RELEASE" />
@@ -493,6 +494,17 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: csv:csv:20">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/csv/csv/20/csv-20.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/csv/csv/20/csv-20-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/csv/csv/20/csv-20.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: dom4j:dom4j:1.6.1">
