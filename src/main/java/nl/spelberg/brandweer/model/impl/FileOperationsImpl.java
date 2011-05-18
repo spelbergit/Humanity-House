@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import nl.spelberg.brandweer.model.FileOperations;
 import org.apache.commons.logging.Log;
@@ -61,6 +62,23 @@ public class FileOperationsImpl implements FileOperations {
                 sb.append(line);
             }
             return sb == null ? "" : sb.toString();
+        } catch (IOException e) {
+            throw new FileOperationException(e);
+        }
+    }
+
+    @Override
+    public void write(String fileName, String expectedCsv) {
+        try {
+            File file = new File(fileName);
+            //noinspection ResultOfMethodCallIgnored
+            file.getParentFile().mkdirs();
+            FileWriter fw = new FileWriter(file);
+            try {
+                fw.write(expectedCsv);
+            } finally {
+                fw.close();
+            }
         } catch (IOException e) {
             throw new FileOperationException(e);
         }

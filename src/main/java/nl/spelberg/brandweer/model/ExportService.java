@@ -6,5 +6,5 @@ public interface ExportService {
 
     void exportPhotos();
 
-    void cleanUp();
+    int exportAndCleanUp();
 }

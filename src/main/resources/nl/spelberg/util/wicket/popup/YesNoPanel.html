@@ -8,19 +8,24 @@
 </head>
 <body>
 <wicket:panel>
-    <form wicket:id="yesNoForm" action="">
-        <span wicket:id="message">Are you sure?</span>
-        <table style="width: 65%;" align="center">
-            <tr>
-                <td align="left">
-                    <input type="submit" wicket:id="noButton" value="No"/>
-                </td>
-                <td align="right">
-                    <input type="submit" wicket:id="yesButton" value="Yes"/>
-                </td>
-            </tr>
-        </table>
-    </form>
+    <!--
+        <form wicket:id="yesNoForm" action="">
+            <span wicket:id="message">Are you sure?</span>
+            <table style="width: 65%;" align="center">
+                <tr>
+                    <td align="left">
+                        <input type="submit" wicket:id="noButton" value="No"/>
+                    </td>
+                    <td align="right">
+                        <input type="submit" wicket:id="yesButton" value="Yes"/>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    -->
+    <span wicket:id="message">Are you sure?</span>
+    <a wicket:id="cancelLink" href="#">Cancel</a>
+    <a wicket:id="confirmLink" href="#">OK</a>
 </wicket:panel>
 </body>
 </html>

@@ -75,7 +75,16 @@ public class ExportServiceImpl implements ExportService {
     }
 
     @Override
-    public void cleanUp() {
-        throw new UnsupportedOperationException("Not implemented.");
+    public int exportAndCleanUp() {
+        exportPhotos();
+        String csv = exportAsCsv();
+        String fileName = brandweerConfig.getExportDir() + "/emailadressen.csv";
+        fileOperations.write(fileName, csv);
+        log.info("Cleanup: exported all photos to csv: " + Utils.nativePath(fileName));
+
+        int count = personDAO.deleteAll();
+        log.info("Cleanup: deleted " + count + " persons.");
+
+        return count;
     }
 }

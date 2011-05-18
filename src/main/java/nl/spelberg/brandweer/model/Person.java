@@ -20,6 +20,7 @@ import org.springframework.util.Assert;
 @NamedQueries({
         @NamedQuery(name = "Person.all", query = "from Person order by photo.lastModified asc"),
         @NamedQuery(name = "Person.count", query = "select count(*) from Person"),
+        @NamedQuery(name = "Person.deleteAll", query = "delete from Person"),
         @NamedQuery(name = "Person.findMostRecent",
                 query = "from Person order by photo.lastModified desc"), @NamedQuery(
         name = "Person.findByPhoto",

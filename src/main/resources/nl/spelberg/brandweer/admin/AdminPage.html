@@ -6,15 +6,18 @@
 <body>
 <wicket:extend>
     <h1>Admin Page</h1>
-    <ul>
-        <li>Download de verzamelde emailadressen hier: <a wicket:id="exportCsvLink" href="#"><span wicket:id="linkText">filename.csv</span></a>
-        </li>
-        <li><a wicket:id="exportPhotosLink" href="#">Exporteer</a> de foto's naar: <span wicket:id="exportDir"></span>
-        </li>
-        <li>Aantal emailadressen: <span wicket:id="aantalPersonen"></span></li>
-        <li><a wicket:id="cleanUpLink" href="#">Opschonen</a> van de geexporteerde foto's</li>
-    </ul>
+    <p>Aantal ingevoerde emailadressen: <span wicket:id="aantalPersonen"></span></p>
+
     <span style="display: none;" wicket:id="cleanUpConfirmation"></span>
+    <p>Foto uitvoer directory: <span wicket:id="exportDir"></span></p>
+    <ul>
+        <li><a wicket:id="cleanUpLink" href="#">Export en opschonen</a> van de emailadressen en foto's.</li>
+        <li>Alleen <a wicket:id="exportPhotosLink" href="#">export</a> van de foto's. Foto's blijven gewoon staan.</li>
+        <li>Download emailadressen als CSV bestand: <a wicket:id="exportCsvLink" href="#">
+            <span wicket:id="linkText">filename.csv</span></a></li>
+    </ul>
+
+    <p wicket:id="feedback"></p>
 </wicket:extend>
 </body>
 </html>

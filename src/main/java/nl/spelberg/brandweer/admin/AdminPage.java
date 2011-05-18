@@ -1,6 +1,5 @@
 package nl.spelberg.brandweer.admin;
 
-import java.io.File;
 import nl.spelberg.brandweer.AbstractPage;
 import nl.spelberg.brandweer.model.BrandweerConfig;
 import nl.spelberg.brandweer.model.ExportService;
@@ -8,17 +7,22 @@ import nl.spelberg.brandweer.model.PersonService;
 import nl.spelberg.util.wicket.DynamicDownloadLink;
 import nl.spelberg.util.wicket.StringDynamicDownloadResource;
 import nl.spelberg.util.wicket.popup.YesNoPanel;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.wicket.Session;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxFallbackLink;
 import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.Link;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
-import org.springframework.util.StringUtils;
 import static nl.spelberg.util.wicket.ContentType.TEXT_CSV;
 
 public class AdminPage extends AbstractPage {
+
+    private static final Log log = LogFactory.getLog(AdminPage.class);
 
     @SpringBean
     private ExportService exportService;
@@ -31,6 +35,9 @@ public class AdminPage extends AbstractPage {
 
     public AdminPage() {
         super("Admin Page");
+
+        final FeedbackPanel feedbackPanel = new FeedbackPanel("feedback");
+        feedbackPanel.setOutputMarkupId(true);
 
         // Download CSV link
         StringDynamicDownloadResource dynamicDownloadResource = new StringDynamicDownloadResource("emailadressen.csv",
@@ -49,10 +56,11 @@ public class AdminPage extends AbstractPage {
             @Override
             public void onClick() {
                 exportService.exportPhotos();
+                Session.get().info("Export van foto's staat in: " + brandweerConfig.getExportDirNative());
                 setResponsePage(AdminPage.class);
             }
         });
-        add(new Label("exportDir", StringUtils.replace(brandweerConfig.getExportDir(), "/", File.separator)));
+        add(new Label("exportDir", brandweerConfig.getExportDirNative()));
 
         // Number of registered persons link
         add(new Label("aantalPersonen", new LoadableDetachableModel<String>() {
@@ -63,19 +71,29 @@ public class AdminPage extends AbstractPage {
         }));
 
         final ModalWindow okCancelWindow = YesNoPanel.createConfirmModal("cleanUpConfirmation",
-                "Alle ingevulde gegevens opschonen?", new YesNoPanel.ConfirmationCallback() {
+                "Alle emailadressen verwijderen", "Alle ingevulde emailadressen verwijderen? (de foto's blijven staan)",
+                new YesNoPanel.ConfirmationCallback() {
 
-            @Override
-            public void onConfirm(AjaxRequestTarget target) {
-                exportService.cleanUp();
-                setResponsePage(AdminPage.class);
-            }
+                    @Override
+                    public void onConfirm(AjaxRequestTarget target) {
+                        try {
+                            exportService.exportAndCleanUp();
+                            Session.get().info("Export van foto's en emailadressen staat in: " +
+                                    brandweerConfig.getExportDirNative());
+                            setResponsePage(AdminPage.class);
+                        } catch (Exception e) {
+                            log.error(e.getMessage(), e);
+                            Session.get().error("Er is een fout opgetreden bij het verwijderen: " + e.getMessage());
+                        }
+                        target.addComponent(feedbackPanel);
+                    }
 
-            @Override
-            public void onCancel(AjaxRequestTarget target) {
-                setResponsePage(AdminPage.class);
-            }
-        });
+                    @Override
+                    public void onCancel(AjaxRequestTarget target) {
+                        Session.get().info("Verwijderen is afgebroken; er is niets verwijderd.");
+                        setResponsePage(AdminPage.class);
+                    }
+                });
         AjaxFallbackLink<Void> cleanUpLink = new AjaxFallbackLink<Void>("cleanUpLink") {
             @Override
             public void onClick(AjaxRequestTarget target) {
@@ -85,6 +103,8 @@ public class AdminPage extends AbstractPage {
 
         add(cleanUpLink);
         add(okCancelWindow);
+
+        add(feedbackPanel);
     }
 
 }

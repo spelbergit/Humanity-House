@@ -99,4 +99,7 @@ public class Utils {
         return l == null ? "" : String.valueOf(l);
     }
 
+    public static String nativePath(String path) {
+        return StringUtils.replace(path, "/", File.separator);
+    }
 }

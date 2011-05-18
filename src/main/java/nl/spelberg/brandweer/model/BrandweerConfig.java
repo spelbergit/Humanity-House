@@ -1,5 +1,6 @@
 package nl.spelberg.brandweer.model;
 
+import nl.spelberg.util.Utils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.log4j.Level;
@@ -48,6 +49,10 @@ public class BrandweerConfig {
     public void setExportDir(String exportDir) {
         this.exportDir = StringUtils.cleanPath(exportDir);
         logConfig("exportDir=" + this.exportDir);
+    }
+
+    public String getExportDirNative() {
+        return Utils.nativePath(exportDir);
     }
 
     public String getImagePrefix() {
