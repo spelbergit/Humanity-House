@@ -8,9 +8,6 @@ import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
-/**
- * TODO: write documentation.
- */
 public class PersonImagePage extends AbstractPage {
 
     @SpringBean(name = "photoService")
@@ -19,15 +16,12 @@ public class PersonImagePage extends AbstractPage {
     public PersonImagePage(final Page page, IModel<Person> personModel) {
         super("Foto");
         //noinspection WicketForgeJavaIdInspection
-        add(
-                new Link("back") {
-
-                    @Override
-                    public void onClick() {
-                        setResponsePage(page);
-                    }
-
-
-                }.add(new Image("image", new PersonDynamicImageResource(personModel, photoService))));
+        add(new Link("back") {
+            @Override
+            public void onClick() {
+                setResponsePage(page);
+            }
+        }.add(new Image("image", new PersonDynamicImageResource(personModel, photoService))));
     }
+
 }

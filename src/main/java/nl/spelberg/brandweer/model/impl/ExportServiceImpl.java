@@ -73,4 +73,9 @@ public class ExportServiceImpl implements ExportService {
         }
         log.info("Exporteer foto's: " + count + " foto's geexporteerd naar " + brandweerConfig.getExportDir());
     }
+
+    @Override
+    public void cleanUp() {
+        throw new UnsupportedOperationException("Not implemented.");
+    }
 }

@@ -7,6 +7,10 @@ import nl.spelberg.brandweer.model.ExportService;
 import nl.spelberg.brandweer.model.PersonService;
 import nl.spelberg.util.wicket.DynamicDownloadLink;
 import nl.spelberg.util.wicket.StringDynamicDownloadResource;
+import nl.spelberg.util.wicket.popup.YesNoPanel;
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.markup.html.AjaxFallbackLink;
+import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.model.LoadableDetachableModel;
@@ -57,6 +61,30 @@ public class AdminPage extends AbstractPage {
                 return String.valueOf(personService.countPersons());
             }
         }));
+
+        final ModalWindow okCancelWindow = YesNoPanel.createConfirmModal("cleanUpConfirmation",
+                "Alle ingevulde gegevens opschonen?", new YesNoPanel.ConfirmationCallback() {
+
+            @Override
+            public void onConfirm(AjaxRequestTarget target) {
+                exportService.cleanUp();
+                setResponsePage(AdminPage.class);
+            }
+
+            @Override
+            public void onCancel(AjaxRequestTarget target) {
+                setResponsePage(AdminPage.class);
+            }
+        });
+        AjaxFallbackLink<Void> cleanUpLink = new AjaxFallbackLink<Void>("cleanUpLink") {
+            @Override
+            public void onClick(AjaxRequestTarget target) {
+                okCancelWindow.show(target);
+            }
+        };
+
+        add(cleanUpLink);
+        add(okCancelWindow);
     }
 
 }

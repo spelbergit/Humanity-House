@@ -5,4 +5,6 @@ public interface ExportService {
     String exportAsCsv();
 
     void exportPhotos();
+
+    void cleanUp();
 }
