@@ -22,8 +22,8 @@ import org.springframework.util.Assert;
         @NamedQuery(name = "Person.count", query = "select count(*) from Person"),
         @NamedQuery(name = "Person.findMostRecent",
                 query = "from Person order by photo.lastModified desc"), @NamedQuery(
-                name = "Person.findByPhoto",
-                query = "from Person where photo.name = :photoName")})
+        name = "Person.findByPhoto",
+        query = "from Person where photo.name = :photoName")})
 public class Person extends AbstractVersioned {
 
     @Id
@@ -72,7 +72,7 @@ public class Person extends AbstractVersioned {
         return email;
     }
 
-    public Photo foto() {
+    public Photo photo() {
         return photo;
     }
 

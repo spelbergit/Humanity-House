@@ -7,7 +7,9 @@
 <wicket:extend>
     <h1>Admin Page</h1>
     <ul>
-        <li>Download de verzamelde emailadressen hier: <a wicket:id="csvLink" href="#"><span wicket:id="linkText">filename.csv</span></a>
+        <li>Download de verzamelde emailadressen hier: <a wicket:id="exportCsvLink" href="#"><span wicket:id="linkText">filename.csv</span></a>
+        </li>
+        <li><a wicket:id="exportPhotosLink" href="#">Exporteer</a> de foto's naar: <span wicket:id="exportDir"></span>
         </li>
         <li>Aantal emailadressen: <span wicket:id="aantalPersonen"></span></li>
     </ul>

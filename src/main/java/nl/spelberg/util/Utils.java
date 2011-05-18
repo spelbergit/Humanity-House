@@ -76,13 +76,12 @@ public class Utils {
 
         final List<String> extList = Arrays.asList(extensions);
 
-        File[] files = dir.listFiles(
-                new FileFilter() {
-                    @Override
-                    public boolean accept(File file) {
-                        return file.isFile() && extList.contains(StringUtils.getFilenameExtension(file.getPath()));
-                    }
-                });
+        File[] files = dir.listFiles(new FileFilter() {
+            @Override
+            public boolean accept(File file) {
+                return file.isFile() && extList.contains(StringUtils.getFilenameExtension(file.getPath()));
+            }
+        });
 
         SortedSet<String> sortedFiles = new TreeSet<String>();
         for (File f : files) {
@@ -91,4 +90,13 @@ public class Utils {
 
         return sortedFiles;
     }
+
+    public static String emptyWhenNull(String s) {
+        return s == null ? "" : s;
+    }
+
+    public static String emptyWhenNullString(Long l) {
+        return l == null ? "" : String.valueOf(l);
+    }
+
 }

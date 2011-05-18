@@ -15,6 +15,7 @@ public class BrandweerConfig {
     private static final String[] PHOTO_EXTENSIONS = {"jpg", "png", "gif"};
 
     private String fotoDir;
+    private String exportDir;
 
     private String imagePrefix;
 
@@ -37,6 +38,16 @@ public class BrandweerConfig {
     public void setFotoDir(String fotoDir) {
         this.fotoDir = StringUtils.cleanPath(fotoDir);
         logConfig("fotoDir=" + this.fotoDir);
+    }
+
+    public String getExportDir() {
+        return exportDir;
+    }
+
+    @Required
+    public void setExportDir(String exportDir) {
+        this.exportDir = StringUtils.cleanPath(exportDir);
+        logConfig("exportDir=" + this.exportDir);
     }
 
     public String getImagePrefix() {

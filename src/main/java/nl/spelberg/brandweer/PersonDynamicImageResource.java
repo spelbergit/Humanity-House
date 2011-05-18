@@ -24,11 +24,11 @@ public class PersonDynamicImageResource extends DynamicImageResource {
     @Override
     protected byte[] getImageData() {
         Person person = personModel.getObject();
-        Photo photo = person.foto();
+        Photo photo = person.photo();
         return photoService.readFotoData(photo);
     }
 
     public Photo getPhoto() {
-        return personModel.getObject().foto();
+        return personModel.getObject().photo();
     }
 }

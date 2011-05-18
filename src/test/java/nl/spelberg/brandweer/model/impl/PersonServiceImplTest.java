@@ -29,7 +29,7 @@ public class PersonServiceImplTest {
     public void testGetMostRecentPersonExists() throws Exception {
         Photo photo = mock(Photo.class);
         Person person = mock(Person.class);
-        when(person.foto()).thenReturn(photo);
+        when(person.photo()).thenReturn(photo);
 
         when(photoService.findMostRecentPhoto()).thenReturn(photo);
         when(personDAO.find(photo)).thenReturn(person);
@@ -50,7 +50,7 @@ public class PersonServiceImplTest {
 
         Person p = personService.getMostRecentPerson();
 
-        assertEquals(photo, p.foto());
+        assertEquals(photo, p.photo());
 
         verify(personDAO).persist(Matchers.<Person>any());
     }
