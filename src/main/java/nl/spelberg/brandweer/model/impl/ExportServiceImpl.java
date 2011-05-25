@@ -1,6 +1,6 @@
 package nl.spelberg.brandweer.model.impl;
 
-import com.mindprod.csv.CSVWriter;
+import java.io.IOException;
 import java.io.StringWriter;
 import java.util.List;
 import nl.spelberg.brandweer.dao.PersonDAO;
@@ -8,6 +8,7 @@ import nl.spelberg.brandweer.model.BrandweerConfig;
 import nl.spelberg.brandweer.model.ExportService;
 import nl.spelberg.brandweer.model.FileOperations;
 import nl.spelberg.brandweer.model.Person;
+import nl.spelberg.csv.CSVWriter;
 import nl.spelberg.util.Utils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -32,28 +33,26 @@ public class ExportServiceImpl implements ExportService {
 
     @Override
     public String exportAsCsv() {
-        StringWriter stringWriter = new StringWriter();
-        CSVWriter csvWriter = new CSVWriter(stringWriter);
+        try {
+            StringWriter stringWriter = new StringWriter();
+            CSVWriter csvWriter = new CSVWriter(stringWriter);
 
-        // header
-        csvWriter.put("ID");
-        csvWriter.put("Naam");
-        csvWriter.put("Email");
-        csvWriter.put("Foto");
-        csvWriter.nl();
+            // header
+            csvWriter.addLine("ID", "Naam", "Email", "Foto");
 
-        // data
-        List<Person> persons = personDAO.all();
-        for (Person person : persons) {
-            csvWriter.put(Utils.emptyWhenNullString(person.id()));
-            csvWriter.put(Utils.emptyWhenNull(person.name()));
-            csvWriter.put(Utils.emptyWhenNull(person.email()));
-            csvWriter.put(person.photo().asHumanityHouseName(brandweerConfig.getImagePrefix()));
-            csvWriter.nl();
+            // data
+            List<Person> persons = personDAO.all();
+            for (Person person : persons) {
+                String personId = Utils.emptyWhenNullString(person.id());
+                String name = Utils.emptyWhenNull(person.name());
+                String email = Utils.emptyWhenNull(person.email());
+                String photo = person.photo().asHumanityHouseName(brandweerConfig.getImagePrefix());
+                csvWriter.addLine(personId, name, email, photo);
+            }
+            return stringWriter.toString();
+        } catch (IOException e) {
+            throw new RuntimeException(e.getMessage(), e);
         }
-
-
-        return stringWriter.toString();
     }
 
     @Override
