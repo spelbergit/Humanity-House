@@ -117,7 +117,6 @@ public class BrandweerConfig {
         log.info(message);
     }
 
-
     public String getLogLevel() {
         return logLevel;
     }

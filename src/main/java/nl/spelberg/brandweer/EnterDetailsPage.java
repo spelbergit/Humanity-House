@@ -1,6 +1,7 @@
 package nl.spelberg.brandweer;
 
 import nl.spelberg.brandweer.model.BrandweerConfig;
+import nl.spelberg.brandweer.model.ConfigService;
 import nl.spelberg.brandweer.model.Person;
 import nl.spelberg.brandweer.model.PersonService;
 import nl.spelberg.brandweer.model.PhotoCache;
@@ -15,8 +16,8 @@ import org.springframework.util.Assert;
 
 public class EnterDetailsPage extends AbstractPage {
 
-    @SpringBean(name = "brandweerConfig")
-    private BrandweerConfig brandweerConfig;
+    @SpringBean(name = "configService")
+    private ConfigService configService;
 
     @SpringBean(name = "personService")
     private PersonService personService;
@@ -30,6 +31,8 @@ public class EnterDetailsPage extends AbstractPage {
     public EnterDetailsPage(Person person) {
         super("Vul je gegevens in");
         Assert.notNull(person, "person is null");
+
+        BrandweerConfig brandweerConfig = configService.getConfig();
 
         final LoadableDetachableModel<Person> personModel = new PersonLoadableDetachableModel(person, personService);
         add(new PersonPanel("personPanel", personModel));

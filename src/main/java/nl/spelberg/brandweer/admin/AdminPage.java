@@ -1,7 +1,7 @@
 package nl.spelberg.brandweer.admin;
 
 import nl.spelberg.brandweer.AbstractPage;
-import nl.spelberg.brandweer.model.BrandweerConfig;
+import nl.spelberg.brandweer.model.ConfigService;
 import nl.spelberg.brandweer.model.ExportService;
 import nl.spelberg.brandweer.model.PersonService;
 import nl.spelberg.util.wicket.DynamicDownloadLink;
@@ -30,8 +30,8 @@ public class AdminPage extends AbstractPage {
     @SpringBean
     private PersonService personService;
 
-    @SpringBean
-    private BrandweerConfig brandweerConfig;
+    @SpringBean(name = "configService")
+    private ConfigService configService;
 
     public AdminPage() {
         super("Admin Page");
@@ -56,11 +56,11 @@ public class AdminPage extends AbstractPage {
             @Override
             public void onClick() {
                 exportService.exportPhotos();
-                Session.get().info("Export van foto's staat in: " + brandweerConfig.getExportDirNative());
+                Session.get().info("Export van foto's staat in: " + configService.getConfig().getExportDirNative());
                 setResponsePage(AdminPage.class);
             }
         });
-        add(new Label("exportDir", brandweerConfig.getExportDirNative()));
+        add(new Label("exportDir", configService.getConfig().getExportDirNative()));
 
         // Number of registered persons link
         add(new Label("aantalPersonen", new LoadableDetachableModel<String>() {
@@ -79,7 +79,7 @@ public class AdminPage extends AbstractPage {
                         try {
                             exportService.exportAndCleanUp();
                             Session.get().info("Export van foto's en emailadressen staat in: " +
-                                    brandweerConfig.getExportDirNative());
+                                    configService.getConfig().getExportDirNative());
                             setResponsePage(AdminPage.class);
                         } catch (Exception e) {
                             log.error(e.getMessage(), e);

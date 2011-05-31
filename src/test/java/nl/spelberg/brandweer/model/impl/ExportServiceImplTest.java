@@ -4,10 +4,12 @@ import java.util.Arrays;
 import java.util.List;
 import nl.spelberg.brandweer.dao.PersonDAO;
 import nl.spelberg.brandweer.model.BrandweerConfig;
+import nl.spelberg.brandweer.model.ConfigService;
 import nl.spelberg.brandweer.model.ExportService;
 import nl.spelberg.brandweer.model.FileOperations;
 import nl.spelberg.brandweer.model.Person;
 import nl.spelberg.brandweer.model.Photo;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -21,7 +23,10 @@ import static org.mockito.Mockito.*;
 public class ExportServiceImplTest {
 
     @Mock(answer = Answers.RETURNS_SMART_NULLS)
-    BrandweerConfig brandweerConfig;
+    private ConfigService configService;
+
+    @Mock(answer = Answers.RETURNS_SMART_NULLS)
+    private BrandweerConfig brandweerConfig;
 
     @Mock(answer = Answers.RETURNS_SMART_NULLS)
     private PersonDAO personDAO;
@@ -31,6 +36,11 @@ public class ExportServiceImplTest {
 
     @InjectMocks
     private ExportService exportService = new ExportServiceImpl();
+
+    @Before
+    public void setUp() throws Exception {
+        when(configService.getConfig()).thenReturn(brandweerConfig);
+    }
 
     @Test
     public void testExportAsCsv() {

@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import nl.spelberg.brandweer.model.BrandweerConfig;
+import nl.spelberg.brandweer.model.ConfigService;
 import nl.spelberg.brandweer.model.Photo;
 import nl.spelberg.brandweer.model.PhotoCache;
 import nl.spelberg.brandweer.model.PhotoService;
@@ -25,10 +26,11 @@ public class PhotoServiceImpl implements PhotoService {
     private PhotoCache photoCache;
 
     @Autowired
-    private BrandweerConfig brandweerConfig;
+    private ConfigService configService;
 
     @Override
     public Photo findMostRecentPhoto() {
+        BrandweerConfig brandweerConfig = configService.getConfig();
         Set<String> fileNames = Utils.getFileNames(brandweerConfig.getFotoDir(), brandweerConfig.getFotoExtensions());
         if (fileNames.isEmpty()) {
             log.debug("No files with extension " + Arrays.asList(brandweerConfig.getFotoExtensions()) +
