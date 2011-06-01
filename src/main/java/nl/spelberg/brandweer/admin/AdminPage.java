@@ -30,7 +30,7 @@ public class AdminPage extends AbstractPage {
     @SpringBean
     private PersonService personService;
 
-    @SpringBean(name = "configService")
+    @SpringBean
     private ConfigService configService;
 
     public AdminPage() {
@@ -105,6 +105,14 @@ public class AdminPage extends AbstractPage {
         add(okCancelWindow);
 
         add(feedbackPanel);
+
+        //        Link<Void> configLink = new AjaxFallbackLink<Void>("configLink") {
+        //            @Override
+        //            public void onClick(AjaxRequestTarget target) {
+        //                setResponsePage(ConfigPage.class);
+        //            }
+        //        };
+        //        add(configLink);
     }
 
 }

@@ -75,13 +75,9 @@ public class Photo {
         return sb.toString();
     }
 
-    public String asHumanityHouseName(String imagePrefix) {
-        String[] pathElements = StringUtils.tokenizeToStringArray(path(), "/");
-        String localDir = pathElements.length > 1 ? pathElements[pathElements.length - 2] + "_" : "";
-
+    public String asHumanityHouseName(String imagePrefix, String imagePrefixReplacement) {
         String fotoNumber = stripPrefix(name(), imagePrefix);
-
-        return "HumanityHouse-" + localDir + fotoNumber + "." + type();
+        return imagePrefixReplacement + fotoNumber + "." + type();
     }
 
     private String stripPrefix(String s, String prefix) {

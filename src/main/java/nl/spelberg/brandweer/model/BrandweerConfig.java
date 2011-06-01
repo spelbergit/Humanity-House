@@ -1,5 +1,6 @@
 package nl.spelberg.brandweer.model;
 
+import javax.persistence.Id;
 import nl.spelberg.util.Utils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -15,19 +16,24 @@ public class BrandweerConfig {
 
     private static final String[] PHOTO_EXTENSIONS = {"jpg", "png", "gif"};
 
+    @Id
+    private Long id;
+
     private String fotoDir;
     private String exportDir;
 
     private String imagePrefix;
+    private String imagePrefixReplacement;
 
     private int maxPhotoSize;
     private int timingHome;
     private int timingEmail;
-    private int timingFinish;
 
+    private int timingFinish;
     private String logLevel = Level.INFO.toString();
 
     public BrandweerConfig() {
+        // set loglevel of BrandweerConfig always to INFO:
         Logger.getLogger(getClass()).setLevel(Level.INFO);
     }
 
@@ -62,7 +68,17 @@ public class BrandweerConfig {
     @Required
     public void setImagePrefix(String imagePrefix) {
         this.imagePrefix = imagePrefix;
-        logConfig("imagePrefix=" + this.fotoDir);
+        logConfig("imagePrefix=" + this.imagePrefix);
+    }
+
+    public String getImagePrefixReplacement() {
+        return imagePrefixReplacement;
+    }
+
+    @Required
+    public void setImagePrefixReplacement(String imagePrefixReplacement) {
+        this.imagePrefixReplacement = imagePrefixReplacement;
+        logConfig("imagePrefixReplacement=" + this.imagePrefixReplacement);
     }
 
     public int getMaxPhotoSize() {

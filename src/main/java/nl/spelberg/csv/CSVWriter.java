@@ -62,6 +62,9 @@ public class CSVWriter {
     }
 
     private String escape(String value) {
+        if (value == null) {
+            return null;
+        }
         if (value.contains(quote)) {
             value = StringUtils.replace(value, quote, quote + quote + quote);
         }

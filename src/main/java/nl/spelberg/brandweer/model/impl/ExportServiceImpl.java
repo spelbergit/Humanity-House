@@ -13,7 +13,6 @@ import nl.spelberg.csv.CSVWriter;
 import nl.spelberg.util.Utils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,18 +23,20 @@ public class ExportServiceImpl implements ExportService {
 
     private static final Log log = LogFactory.getLog(ExportServiceImpl.class);
 
-    @SpringBean(name = "configService")
+    @Autowired
     private ConfigService configService;
 
     @Autowired
-    PersonDAO personDAO;
+    private PersonDAO personDAO;
 
     @Autowired
-    FileOperations fileOperations;
+    private FileOperations fileOperations;
 
     @Override
     public String exportAsCsv() {
         try {
+            BrandweerConfig brandweerConfig = configService.getConfig();
+
             StringWriter stringWriter = new StringWriter();
             CSVWriter csvWriter = new CSVWriter(stringWriter);
 
@@ -48,7 +49,8 @@ public class ExportServiceImpl implements ExportService {
                 String personId = Utils.emptyWhenNullString(person.id());
                 String name = Utils.emptyWhenNull(person.name());
                 String email = Utils.emptyWhenNull(person.email());
-                String photo = person.photo().asHumanityHouseName(configService.getConfig().getImagePrefix());
+                String photo = person.photoAsHumanityHouseName(brandweerConfig.getImagePrefix(),
+                        brandweerConfig.getImagePrefixReplacement());
                 csvWriter.addLine(personId, name, email, photo);
             }
             return stringWriter.toString();
@@ -65,8 +67,8 @@ public class ExportServiceImpl implements ExportService {
         int count = 0;
         for (Person person : persons) {
             String fromPath = person.photo().path();
-            String toPath = brandweerConfig.getExportDir() + "/" + person.photo().asHumanityHouseName(
-                    brandweerConfig.getImagePrefix());
+            String toPath = brandweerConfig.getExportDir() + "/" + person.photoAsHumanityHouseName(
+                    brandweerConfig.getImagePrefix(), brandweerConfig.getImagePrefixReplacement());
             try {
                 fileOperations.copyFile(fromPath, toPath);
                 count++;

@@ -22,6 +22,8 @@ import static org.mockito.Mockito.*;
 @RunWith(MockitoJUnitRunner.class)
 public class ExportServiceImplTest {
 
+    private static final String IMAGE_PREFIX = "IMG";
+    private static final String IMAGE_REPLACEMENT = "HumanityHouse_OnTour_";
     @Mock(answer = Answers.RETURNS_SMART_NULLS)
     private ConfigService configService;
 
@@ -40,13 +42,13 @@ public class ExportServiceImplTest {
     @Before
     public void setUp() throws Exception {
         when(configService.getConfig()).thenReturn(brandweerConfig);
+        when(brandweerConfig.getImagePrefix()).thenReturn(IMAGE_PREFIX);
+        when(brandweerConfig.getImagePrefixReplacement()).thenReturn(IMAGE_REPLACEMENT);
     }
 
     @Test
     public void testExportAsCsv() {
         //setup
-        when(brandweerConfig.getImagePrefix()).thenReturn("IMG");
-
         List<Person> persons = mockPersons();
         when(personDAO.all()).thenReturn(persons);
 
@@ -62,7 +64,6 @@ public class ExportServiceImplTest {
     @Test
     public void testRenamePhotos() {
         // setup
-        when(brandweerConfig.getImagePrefix()).thenReturn("IMG");
         when(brandweerConfig.getExportDir()).thenReturn("C:/Documents and Settings/hh/Afbeeldingen/Export");
 
         List<Person> persons = mockPersons();
@@ -73,13 +74,13 @@ public class ExportServiceImplTest {
 
         // verify
         verify(fileOperations).copyFile("C:/Documents and Settings/hh/Afbeeldingen/DenHaag/IMG00001.JPG",
-                "C:/Documents and Settings/hh/Afbeeldingen/Export/HumanityHouse-DenHaag_00001.jpg");
+                "C:/Documents and Settings/hh/Afbeeldingen/Export/HumanityHouse_OnTour_00001.jpg");
         verify(fileOperations).copyFile("C:/Documents and Settings/hh/Afbeeldingen/DenHaag/IMG00002.JPG",
-                "C:/Documents and Settings/hh/Afbeeldingen/Export/HumanityHouse-DenHaag_00002.jpg");
+                "C:/Documents and Settings/hh/Afbeeldingen/Export/HumanityHouse_OnTour_00002.jpg");
         verify(fileOperations).copyFile("IMG00003.JPG",
-                "C:/Documents and Settings/hh/Afbeeldingen/Export/HumanityHouse-00003.jpg");
+                "C:/Documents and Settings/hh/Afbeeldingen/Export/HumanityHouse_OnTour_00003.jpg");
         verify(fileOperations).copyFile("IMG00004.JPG",
-                "C:/Documents and Settings/hh/Afbeeldingen/Export/HumanityHouse-00004.jpg");
+                "C:/Documents and Settings/hh/Afbeeldingen/Export/HumanityHouse_OnTour_00004.jpg");
     }
 
     @Test
@@ -97,13 +98,13 @@ public class ExportServiceImplTest {
         // verify
         String expectedCsv = createExpectedCsv();
         verify(fileOperations).copyFile("C:/Documents and Settings/hh/Afbeeldingen/DenHaag/IMG00001.JPG",
-                "C:/Documents and Settings/hh/Afbeeldingen/Export/HumanityHouse-DenHaag_00001.jpg");
+                "C:/Documents and Settings/hh/Afbeeldingen/Export/HumanityHouse_OnTour_00001.jpg");
         verify(fileOperations).copyFile("C:/Documents and Settings/hh/Afbeeldingen/DenHaag/IMG00002.JPG",
-                "C:/Documents and Settings/hh/Afbeeldingen/Export/HumanityHouse-DenHaag_00002.jpg");
+                "C:/Documents and Settings/hh/Afbeeldingen/Export/HumanityHouse_OnTour_00002.jpg");
         verify(fileOperations).copyFile("IMG00003.JPG",
-                "C:/Documents and Settings/hh/Afbeeldingen/Export/HumanityHouse-00003.jpg");
+                "C:/Documents and Settings/hh/Afbeeldingen/Export/HumanityHouse_OnTour_00003.jpg");
         verify(fileOperations).copyFile("IMG00004.JPG",
-                "C:/Documents and Settings/hh/Afbeeldingen/Export/HumanityHouse-00004.jpg");
+                "C:/Documents and Settings/hh/Afbeeldingen/Export/HumanityHouse_OnTour_00004.jpg");
         verify(fileOperations).write(exportDir + "/emailadressen.csv", expectedCsv);
         verify(personDAO).deleteAll();
         assertEquals(persons.size(), count);
@@ -112,10 +113,10 @@ public class ExportServiceImplTest {
     private String createExpectedCsv() {
         String expectedCsv = "";
         expectedCsv += "ID,Naam,Email,Foto\r\n";
-        expectedCsv += "1,Chris,chris@hh.com,HumanityHouse-DenHaag_00001.jpg\r\n";
-        expectedCsv += "2,\"Ditmar van Dam\",ditmar@hh.com,HumanityHouse-DenHaag_00002.jpg\r\n";
-        expectedCsv += "3,\"Enfant Terrible\",et@mail.com,HumanityHouse-00003.jpg\r\n";
-        expectedCsv += "4,,,HumanityHouse-00004.jpg\r\n";
+        expectedCsv += "1,Chris,chris@hh.com,HumanityHouse_OnTour_00001.jpg\r\n";
+        expectedCsv += "2,\"Ditmar van Dam\",ditmar@hh.com,HumanityHouse_OnTour_00002.jpg\r\n";
+        expectedCsv += "3,\"Enfant Terrible\",et@mail.com,HumanityHouse_OnTour_00003.jpg\r\n";
+        expectedCsv += "4,,,HumanityHouse_OnTour_00004.jpg\r\n";
         return expectedCsv;
     }
 
@@ -130,11 +131,15 @@ public class ExportServiceImplTest {
     }
 
     private Person mockPerson(Long id, String name, String email, Photo photo) {
+        String imagePrefix = brandweerConfig.getImagePrefix();
+        String prefixReplacement = brandweerConfig.getImagePrefixReplacement();
         Person person = mock(Person.class);
         when(person.id()).thenReturn(id);
         when(person.name()).thenReturn(name);
         when(person.email()).thenReturn(email);
         when(person.photo()).thenReturn(photo);
+        when(person.photoAsHumanityHouseName(imagePrefix, prefixReplacement)).thenReturn(photo.asHumanityHouseName(
+                imagePrefix, prefixReplacement));
         return person;
     }
 
