@@ -178,7 +178,7 @@
   <component name="CopyrightManager" default="">
     <module2copyright />
   </component>
-  <component name="DataSourceManagerImpl" compressed="false" />
+  <component name="DataSourceManagerImpl" compressed="false" hash="0" />
   <component name="DependencyValidationManager">
     <option name="SKIP_IMPORT_STATEMENTS" value="false" />
   </component>
@@ -193,14 +193,8 @@
       <item index="4" class="java.lang.String" itemvalue="org.springframework.beans.factory.annotation.Autowired" />
     </list>
   </component>
-  <component name="FacetAutodetectingManager">
-    <autodetection-disabled>
-      <facet-type id="web">
-        <modules>
-          <module name="brandweer" />
-        </modules>
-      </facet-type>
-    </autodetection-disabled>
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$" />
   </component>
   <component name="IdProvider" IDEtalkID="8539BBA378CE88B0110261C97F74E1C4" />
   <component name="InspectionProjectProfileManager">
@@ -248,6 +242,9 @@
           <option name="REPORT_NULLS_PASSED_TO_NON_ANNOTATED_METHOD" value="true" />
         </inspection_tool>
         <inspection_tool class="OnDemandImport" enabled="true" level="WARNING" enabled_by_default="true" />
+        <inspection_tool class="PointlessBooleanExpression" enabled="false" level="WARNING" enabled_by_default="false">
+          <option name="m_ignoreExpressionsContainingConstants" value="false" />
+        </inspection_tool>
         <inspection_tool class="RedundantImport" enabled="true" level="WARNING" enabled_by_default="true" />
         <inspection_tool class="RequiredAttributes" enabled="true" level="WARNING" enabled_by_default="true">
           <option name="myAdditionalRequiredHtmlAttributes" value="action,alt,src" />
@@ -436,6 +433,31 @@
         <default-constraints vsize-policy="6" hsize-policy="0" anchor="0" fill="2" />
       </item>
     </group>
+  </component>
+  <component name="ProjectCodeStyleSettingsManager">
+    <option name="PER_PROJECT_SETTINGS">
+      <value>
+        <option name="CLASS_COUNT_TO_USE_IMPORT_ON_DEMAND" value="9999" />
+        <option name="NAMES_COUNT_TO_USE_IMPORT_ON_DEMAND" value="9999" />
+        <option name="PACKAGES_TO_USE_IMPORT_ON_DEMAND">
+          <value>
+            <package name="org.mockito.Mockito" withSubpackages="true" static="true" />
+            <package name="org.junit.Assert" withSubpackages="true" static="true" />
+          </value>
+        </option>
+        <option name="IMPORT_LAYOUT_TABLE">
+          <value>
+            <package name="" withSubpackages="true" static="false" />
+            <emptyLine />
+            <package name="" withSubpackages="true" static="true" />
+          </value>
+        </option>
+        <XML>
+          <option name="XML_LEGACY_SETTINGS_IMPORTED" value="true" />
+        </XML>
+      </value>
+    </option>
+    <option name="USE_PER_PROJECT_SETTINGS" value="true" />
   </component>
   <component name="ProjectKey">
     <option name="state" value="project://default" />

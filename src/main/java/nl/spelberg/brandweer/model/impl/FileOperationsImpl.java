@@ -17,6 +17,18 @@ public class FileOperationsImpl implements FileOperations {
 
     private static final Log log = LogFactory.getLog(FileOperationsImpl.class);
 
+    @Override
+    public void createDirectoryRecursive(String dirPath) {
+        createDirectoryRecursive(new File(dirPath));
+    }
+
+    public void createDirectoryRecursive(File path) {
+        boolean result = path.mkdirs();
+        if (result == false) {
+            throw new FileOperationException("Failed to create directory: " + path.getAbsolutePath());
+        }
+    }
+
     @SuppressWarnings({"ResultOfMethodCallIgnored"})
     @Override
     public void copyFile(String fromPath, String toPath) {

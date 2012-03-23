@@ -33,7 +33,12 @@ public class ExportServiceImpl implements ExportService {
     private FileOperations fileOperations;
 
     @Override
-    public String exportAsCsv() {
+    public String personsAllAsCsv() {
+        return personsAsCsv(personDAO.all());
+    }
+
+    @Override
+    public String personsAsCsv(List<Person> personsForExport) {
         try {
             BrandweerConfig brandweerConfig = configService.getConfig();
 
@@ -44,8 +49,7 @@ public class ExportServiceImpl implements ExportService {
             csvWriter.addLine("ID", "Naam", "Email", "Foto");
 
             // data
-            List<Person> persons = personDAO.all();
-            for (Person person : persons) {
+            for (Person person : personsForExport) {
                 String personId = Utils.emptyWhenNullString(person.id());
                 String name = Utils.emptyWhenNull(person.name());
                 String email = Utils.emptyWhenNull(person.email());
@@ -60,12 +64,17 @@ public class ExportServiceImpl implements ExportService {
     }
 
     @Override
-    public void exportPhotos() {
+    public void exportAllPhotos() {
+        exportPhotos(personDAO.all());
+    }
+
+    @Override
+    public void exportPhotos(List<Person> personsForExport) {
         BrandweerConfig brandweerConfig = configService.getConfig();
 
-        List<Person> persons = personDAO.all();
+        fileOperations.createDirectoryRecursive(brandweerConfig.getExportDir());
         int count = 0;
-        for (Person person : persons) {
+        for (Person person : personsForExport) {
             String fromPath = person.photo().path();
             String toPath = brandweerConfig.getExportDir() + "/" + person.photoAsHumanityHouseName(
                     brandweerConfig.getImagePrefix(), brandweerConfig.getImagePrefixReplacement());
@@ -80,11 +89,16 @@ public class ExportServiceImpl implements ExportService {
     }
 
     @Override
-    public int exportAndCleanUp() {
+    public int exportAllAndCleanUp() {
+        return exportAndCleanUp(personDAO.all());
+    }
+
+    @Override
+    public int exportAndCleanUp(List<Person> personsForExport) {
         BrandweerConfig brandweerConfig = configService.getConfig();
 
-        exportPhotos();
-        String csv = exportAsCsv();
+        exportPhotos(personsForExport);
+        String csv = personsAsCsv(personsForExport);
         String fileName = brandweerConfig.getExportDir() + "/emailadressen.csv";
         fileOperations.write(fileName, csv);
         log.info("Cleanup: exported all photos to csv: " + Utils.nativePath(fileName));

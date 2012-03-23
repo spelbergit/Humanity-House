@@ -7,4 +7,6 @@ public interface FileOperations {
     String read(String fileName);
 
     void write(String fileName, String expectedCsv);
+
+    void createDirectoryRecursive(String dirPath);
 }

@@ -12,6 +12,8 @@ public interface PersonDAO extends JPADAO<Long, Person> {
 
     List<Person> all();
 
+    List<Person> allWithEmail();
+
     Long count();
 
     int deleteAll();

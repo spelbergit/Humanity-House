@@ -18,6 +18,7 @@ import org.springframework.util.Assert;
 @TableGenerator(name = "PERSON_GEN", table = "SEQUENCE_TABLE", pkColumnName = "SEQ_NAME",
         valueColumnName = "SEQ_COUNT", pkColumnValue = "PERSON_SEQ")
 @NamedQueries({@NamedQuery(name = "Person.all", query = "from Person order by photo.lastModified asc"),
+        @NamedQuery(name = "Person.allWithEmail", query = "from Person where email is not null order by photo.lastModified asc"),
         @NamedQuery(name = "Person.count", query = "select count(*) from Person"),
         @NamedQuery(name = "Person.deleteAll", query = "delete from Person"),
         @NamedQuery(name = "Person.findMostRecent",

@@ -16,6 +16,7 @@ import org.mockito.Answers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
@@ -53,7 +54,7 @@ public class ExportServiceImplTest {
         when(personDAO.all()).thenReturn(persons);
 
         // execute
-        String csv = exportService.exportAsCsv();
+        String csv = exportService.personsAllAsCsv();
 
         // verify
         String expectedCsv = createExpectedCsv();
@@ -70,7 +71,7 @@ public class ExportServiceImplTest {
         when(personDAO.all()).thenReturn(persons);
 
         // execute
-        exportService.exportPhotos();
+        exportService.exportAllPhotos();
 
         // verify
         verify(fileOperations).copyFile("C:/Documents and Settings/hh/Afbeeldingen/DenHaag/IMG00001.JPG",
@@ -93,7 +94,7 @@ public class ExportServiceImplTest {
         when(personDAO.all()).thenReturn(persons);
         when(personDAO.deleteAll()).thenReturn(persons.size());
 
-        int count = exportService.exportAndCleanUp();
+        int count = exportService.exportAllAndCleanUp();
 
         // verify
         String expectedCsv = createExpectedCsv();

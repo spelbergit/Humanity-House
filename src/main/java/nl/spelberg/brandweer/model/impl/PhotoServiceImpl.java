@@ -41,7 +41,11 @@ public class PhotoServiceImpl implements PhotoService {
         SortedSet<Photo> photos = new TreeSet<Photo>(new Comparator<Photo>() {
             @Override
             public int compare(Photo photo, Photo other) {
-                return other.lastModified().compareTo(photo.lastModified());
+                int result = other.lastModified().compareTo(photo.lastModified());
+                if (result == 0) {
+                    result = other.name().compareTo(photo.name());
+                }
+                return result;
             }
         });
 

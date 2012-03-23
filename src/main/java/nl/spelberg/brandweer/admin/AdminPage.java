@@ -18,6 +18,7 @@ import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
+
 import static nl.spelberg.util.wicket.ContentType.TEXT_CSV;
 
 public class AdminPage extends AbstractPage {
@@ -44,7 +45,7 @@ public class AdminPage extends AbstractPage {
                 TEXT_CSV) {
             @Override
             public String loadContent() {
-                return exportService.exportAsCsv();
+                return exportService.personsAllAsCsv();
             }
         };
         //noinspection WicketForgeJavaIdInspection
@@ -55,7 +56,7 @@ public class AdminPage extends AbstractPage {
         add(new Link("exportPhotosLink") {
             @Override
             public void onClick() {
-                exportService.exportPhotos();
+                exportService.exportAllPhotos();
                 Session.get().info("Export van foto's staat in: " + configService.getConfig().getExportDirNative());
                 setResponsePage(AdminPage.class);
             }
@@ -77,7 +78,7 @@ public class AdminPage extends AbstractPage {
                     @Override
                     public void onConfirm(AjaxRequestTarget target) {
                         try {
-                            exportService.exportAndCleanUp();
+                            exportService.exportAllAndCleanUp();
                             Session.get().info("Export van foto's en emailadressen staat in: " +
                                     configService.getConfig().getExportDirNative());
                             setResponsePage(AdminPage.class);

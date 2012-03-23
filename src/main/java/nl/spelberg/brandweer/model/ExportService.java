@@ -1,10 +1,18 @@
 package nl.spelberg.brandweer.model;
 
+import java.util.List;
+
 public interface ExportService {
 
-    String exportAsCsv();
+    String personsAllAsCsv();
 
-    void exportPhotos();
+    String personsAsCsv(List<Person> personsForExport);
 
-    int exportAndCleanUp();
+    void exportAllPhotos();
+
+    void exportPhotos(List<Person> personsForExport);
+
+    int exportAllAndCleanUp();
+
+    int exportAndCleanUp(List<Person> persons);
 }
