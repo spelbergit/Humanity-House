@@ -1,6 +1,7 @@
 package nl.spelberg.brandweer.model.impl;
 
 import nl.spelberg.brandweer.dao.PersonDAO;
+import nl.spelberg.brandweer.model.ExportService;
 import nl.spelberg.brandweer.model.Person;
 import nl.spelberg.brandweer.model.PersonService;
 import nl.spelberg.brandweer.model.Photo;
@@ -22,6 +23,9 @@ public class PersonServiceImpl implements PersonService {
 
     @Autowired
     private PhotoService photoService;
+
+    @Autowired
+    private ExportService exportService;
 
     @Override
     public Person findPerson(Long id) {
@@ -60,6 +64,8 @@ public class PersonServiceImpl implements PersonService {
     public void updatePerson(Person person) {
         personDAO.update(person);
         log.info("Gegevens bijgewerkt: " + person);
+
+        exportService.exportAllWithEmailOnlyNew();
     }
 
     @Override

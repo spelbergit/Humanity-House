@@ -102,4 +102,23 @@ public class Utils {
     public static String nativePath(String path) {
         return StringUtils.replace(path, "/", File.separator);
     }
+
+    public static <T> boolean contains(T[] array, T value) {
+        if (array != null) {
+            if (value == null) {
+                for (T arrayValue : array) {
+                    if (arrayValue == null) {
+                        return true;
+                    }
+                }
+            } else {
+                for (T arrayValue : array) {
+                    if (value.equals(arrayValue)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 }

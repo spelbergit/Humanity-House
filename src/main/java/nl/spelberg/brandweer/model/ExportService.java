@@ -8,6 +8,8 @@ public interface ExportService {
 
     String personsAsCsv(List<Person> personsForExport);
 
+    void exportPersonsAsCsv(String personsAsCsv);
+
     void exportAllPhotos();
 
     void exportPhotos(List<Person> personsForExport);
@@ -15,4 +17,10 @@ public interface ExportService {
     int exportAllAndCleanUp();
 
     int exportAndCleanUp(List<Person> persons);
+
+    void exportAllWithEmailOnlyNew();
+
+    void exportAll(List<Person> personsForExport);
+
+    void exportPhotosOnlyNew(List<Person> personsForExport);
 }
