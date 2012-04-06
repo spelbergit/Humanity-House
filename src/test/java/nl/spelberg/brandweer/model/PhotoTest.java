@@ -1,6 +1,12 @@
 package nl.spelberg.brandweer.model;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 public class PhotoTest {
@@ -32,4 +38,20 @@ public class PhotoTest {
         assertEquals("png", photo.type());
     }
 
+    @Test
+    public void testHumanityHouseName() throws IOException {
+        // setup
+        File photoFile = createTempPhoto();
+        Photo photo = new Photo(photoFile.getAbsolutePath());
+        String photoNumber = StringUtils.removeEnd(photoFile.getName().substring(3), ".jpg");
+
+        String photoDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date(photoFile.lastModified()));
+        assertEquals("Blabla-" + photoDate + "-" + photoNumber + ".jpg", photo.asHumanityHouseName("IMG", "Blabla"));
+    }
+
+    private File createTempPhoto() throws IOException {
+        File photoFile = File.createTempFile("IMG", ".jpg");
+        photoFile.deleteOnExit();
+        return photoFile;
+    }
 }

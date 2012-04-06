@@ -1,6 +1,7 @@
 package nl.spelberg.brandweer.model;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import javax.persistence.Column;
@@ -12,6 +13,8 @@ import org.springframework.util.StringUtils;
 
 @Embeddable
 public class Photo {
+
+    private static final SimpleDateFormat DATEFORMAT_PHOTODATE = new SimpleDateFormat("yyyy-MM-dd");
 
     @Column(name = "PHOTO_PATH")
     private String path;
@@ -77,7 +80,9 @@ public class Photo {
 
     public String asHumanityHouseName(String imagePrefix, String imagePrefixReplacement) {
         String fotoNumber = stripPrefix(name(), imagePrefix);
-        return imagePrefixReplacement + fotoNumber + "." + type();
+        String photoDate = DATEFORMAT_PHOTODATE.format(lastModified);
+
+        return imagePrefixReplacement + "-" + photoDate + "-" + fotoNumber + "." + type();
     }
 
     private String stripPrefix(String s, String prefix) {
