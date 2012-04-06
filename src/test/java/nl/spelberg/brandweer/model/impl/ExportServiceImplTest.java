@@ -24,7 +24,7 @@ import static org.mockito.Mockito.*;
 public class ExportServiceImplTest {
 
     private static final String IMAGE_PREFIX = "IMG";
-    private static final String IMAGE_REPLACEMENT = "HumanityHouse_OnTour_";
+    private static final String IMAGE_REPLACEMENT = "HumanityHouse_OnTour";
     @Mock(answer = Answers.RETURNS_SMART_NULLS)
     private ConfigService configService;
 
@@ -75,13 +75,13 @@ public class ExportServiceImplTest {
 
         // verify
         verify(fileOperations).copyFile("C:/Documents and Settings/hh/Afbeeldingen/DenHaag/IMG00001.JPG",
-                "C:/Documents and Settings/hh/Afbeeldingen/Export/HumanityHouse_OnTour_00001.jpg");
+                "C:/Documents and Settings/hh/Afbeeldingen/Export/HumanityHouse_OnTour-1970-01-01-00001.jpg", FileOperations.CopyOption.SKIP_EXISTING);
         verify(fileOperations).copyFile("C:/Documents and Settings/hh/Afbeeldingen/DenHaag/IMG00002.JPG",
-                "C:/Documents and Settings/hh/Afbeeldingen/Export/HumanityHouse_OnTour_00002.jpg");
+                "C:/Documents and Settings/hh/Afbeeldingen/Export/HumanityHouse_OnTour-1970-01-01-00002.jpg", FileOperations.CopyOption.SKIP_EXISTING);
         verify(fileOperations).copyFile("IMG00003.JPG",
-                "C:/Documents and Settings/hh/Afbeeldingen/Export/HumanityHouse_OnTour_00003.jpg");
+                "C:/Documents and Settings/hh/Afbeeldingen/Export/HumanityHouse_OnTour-1970-01-01-00003.jpg", FileOperations.CopyOption.SKIP_EXISTING);
         verify(fileOperations).copyFile("IMG00004.JPG",
-                "C:/Documents and Settings/hh/Afbeeldingen/Export/HumanityHouse_OnTour_00004.jpg");
+                "C:/Documents and Settings/hh/Afbeeldingen/Export/HumanityHouse_OnTour-1970-01-01-00004.jpg", FileOperations.CopyOption.SKIP_EXISTING);
     }
 
     @Test
@@ -99,13 +99,13 @@ public class ExportServiceImplTest {
         // verify
         String expectedCsv = createExpectedCsv();
         verify(fileOperations).copyFile("C:/Documents and Settings/hh/Afbeeldingen/DenHaag/IMG00001.JPG",
-                "C:/Documents and Settings/hh/Afbeeldingen/Export/HumanityHouse_OnTour_00001.jpg");
+                "C:/Documents and Settings/hh/Afbeeldingen/Export/HumanityHouse_OnTour-1970-01-01-00001.jpg", FileOperations.CopyOption.SKIP_EXISTING);
         verify(fileOperations).copyFile("C:/Documents and Settings/hh/Afbeeldingen/DenHaag/IMG00002.JPG",
-                "C:/Documents and Settings/hh/Afbeeldingen/Export/HumanityHouse_OnTour_00002.jpg");
+                "C:/Documents and Settings/hh/Afbeeldingen/Export/HumanityHouse_OnTour-1970-01-01-00002.jpg", FileOperations.CopyOption.SKIP_EXISTING);
         verify(fileOperations).copyFile("IMG00003.JPG",
-                "C:/Documents and Settings/hh/Afbeeldingen/Export/HumanityHouse_OnTour_00003.jpg");
+                "C:/Documents and Settings/hh/Afbeeldingen/Export/HumanityHouse_OnTour-1970-01-01-00003.jpg", FileOperations.CopyOption.SKIP_EXISTING);
         verify(fileOperations).copyFile("IMG00004.JPG",
-                "C:/Documents and Settings/hh/Afbeeldingen/Export/HumanityHouse_OnTour_00004.jpg");
+                "C:/Documents and Settings/hh/Afbeeldingen/Export/HumanityHouse_OnTour-1970-01-01-00004.jpg", FileOperations.CopyOption.SKIP_EXISTING);
         verify(fileOperations).write(exportDir + "/emailadressen.csv", expectedCsv);
         verify(personDAO).deleteAll();
         assertEquals(persons.size(), count);
@@ -114,10 +114,10 @@ public class ExportServiceImplTest {
     private String createExpectedCsv() {
         String expectedCsv = "";
         expectedCsv += "ID,Naam,Email,Foto\r\n";
-        expectedCsv += "1,Chris,chris@hh.com,HumanityHouse_OnTour_00001.jpg\r\n";
-        expectedCsv += "2,\"Ditmar van Dam\",ditmar@hh.com,HumanityHouse_OnTour_00002.jpg\r\n";
-        expectedCsv += "3,\"Enfant Terrible\",et@mail.com,HumanityHouse_OnTour_00003.jpg\r\n";
-        expectedCsv += "4,,,HumanityHouse_OnTour_00004.jpg\r\n";
+        expectedCsv += "1,Chris,chris@hh.com,HumanityHouse_OnTour-1970-01-01-00001.jpg\r\n";
+        expectedCsv += "2,\"Ditmar van Dam\",ditmar@hh.com,HumanityHouse_OnTour-1970-01-01-00002.jpg\r\n";
+        expectedCsv += "3,\"Enfant Terrible\",et@mail.com,HumanityHouse_OnTour-1970-01-01-00003.jpg\r\n";
+        expectedCsv += "4,,,HumanityHouse_OnTour-1970-01-01-00004.jpg\r\n";
         return expectedCsv;
     }
 
