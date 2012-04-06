@@ -65,7 +65,7 @@ public class PersonServiceImpl implements PersonService {
         personDAO.update(person);
         log.info("Gegevens bijgewerkt: " + person);
 
-        exportService.exportAllWithEmailOnlyNew();
+        exportService.exportAllWithEmail();
     }
 
     @Override

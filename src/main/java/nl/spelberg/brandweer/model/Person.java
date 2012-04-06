@@ -77,7 +77,7 @@ public class Person extends AbstractVersioned {
         return photo;
     }
 
-    public String photoAsHumanityHouseName(String imagePrefix, String imagePrefixReplacement) {
+    public String photoAsHumanityHouseFileName(String imagePrefix, String imagePrefixReplacement) {
         return photo.asHumanityHouseName(imagePrefix, imagePrefixReplacement);
     }
 

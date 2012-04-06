@@ -10,6 +10,12 @@ public interface FileOperations {
 
     void createDirectoryRecursive(String dirPath);
 
+    void deleteFile(String fileName);
+
+    void moveFileToDir(String filePath, String toDir);
+
+    boolean fileExists(String filePath);
+
     enum CopyOption {
         SKIP_EXISTING
     }

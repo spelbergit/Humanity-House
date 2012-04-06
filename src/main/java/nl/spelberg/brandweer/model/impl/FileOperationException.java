@@ -12,4 +12,7 @@ public class FileOperationException extends RuntimeException {
         super(e.getMessage(), e);
     }
 
+    public FileOperationException(String message, IOException cause) {
+        super(message, cause);
+    }
 }

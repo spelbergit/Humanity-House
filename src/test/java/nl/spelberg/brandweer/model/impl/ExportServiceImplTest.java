@@ -139,7 +139,7 @@ public class ExportServiceImplTest {
         when(person.name()).thenReturn(name);
         when(person.email()).thenReturn(email);
         when(person.photo()).thenReturn(photo);
-        when(person.photoAsHumanityHouseName(imagePrefix, prefixReplacement)).thenReturn(photo.asHumanityHouseName(
+        when(person.photoAsHumanityHouseFileName(imagePrefix, prefixReplacement)).thenReturn(photo.asHumanityHouseName(
                 imagePrefix, prefixReplacement));
         return person;
     }

@@ -12,15 +12,13 @@ public interface ExportService {
 
     void exportAllPhotos();
 
-    void exportPhotos(List<Person> personsForExport);
-
     int exportAllAndCleanUp();
 
     int exportAndCleanUp(List<Person> persons);
 
-    void exportAllWithEmailOnlyNew();
+    void exportAllWithEmail();
 
-    void exportAll(List<Person> personsForExport);
+    List<Person> exportAll(List<Person> personsForExport);
 
-    void exportPhotosOnlyNew(List<Person> personsForExport);
+    List<Person> exportPhotos(List<Person> personsForExport);
 }

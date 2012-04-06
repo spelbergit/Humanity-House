@@ -2,6 +2,9 @@ package nl.spelberg.brandweer.model.impl;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import nl.spelberg.brandweer.dao.PersonDAO;
 import nl.spelberg.brandweer.model.BrandweerConfig;
@@ -22,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class ExportServiceImpl implements ExportService {
 
     private static final Log log = LogFactory.getLog(ExportServiceImpl.class);
+    private static final SimpleDateFormat DATEFORMAT_YYYYMMDD_HHMMSS = new SimpleDateFormat("yyyyMMdd-hhmmss");
 
     @Autowired
     private ConfigService configService;
@@ -53,7 +57,7 @@ public class ExportServiceImpl implements ExportService {
                 String personId = Utils.emptyWhenNullString(person.id());
                 String name = Utils.emptyWhenNull(person.name());
                 String email = Utils.emptyWhenNull(person.email());
-                String photo = person.photoAsHumanityHouseName(brandweerConfig.getImagePrefix(),
+                String photo = person.photoAsHumanityHouseFileName(brandweerConfig.getImagePrefix(),
                         brandweerConfig.getImagePrefixReplacement());
                 csvWriter.addLine(personId, name, email, photo);
             }
@@ -69,33 +73,27 @@ public class ExportServiceImpl implements ExportService {
     }
 
     @Override
-    public void exportPhotos(List<Person> personsForExport) {
-        exportPhotos(personsForExport, false);
-    }
-
-    @Override
-    public void exportPhotosOnlyNew(List<Person> personsForExport) {
-        exportPhotos(personsForExport, true);
-    }
-
-    private void exportPhotos(List<Person> personsForExport, boolean skipExisting) {
+    public List<Person> exportPhotos(List<Person> personsForExport) {
         BrandweerConfig brandweerConfig = configService.getConfig();
 
         fileOperations.createDirectoryRecursive(brandweerConfig.getExportDir());
-        int count = 0;
+
+        ArrayList<Person> personsWithOriginalPhoto = new ArrayList<Person>();
         for (Person person : personsForExport) {
             String fromPath = person.photo().path();
-            String toPath = brandweerConfig.getExportDir() + "/" + person.photoAsHumanityHouseName(
-                    brandweerConfig.getImagePrefix(), brandweerConfig.getImagePrefixReplacement());
+            String toPath = exportPhotoPath(person);
             try {
-                FileOperations.CopyOption[] copyOptions = skipExisting ? new FileOperations.CopyOption[]{FileOperations.CopyOption.SKIP_EXISTING} : new FileOperations.CopyOption[0];
-                fileOperations.copyFile(fromPath, toPath, copyOptions);
-                count++;
+                fileOperations.copyFile(fromPath, toPath, FileOperations.CopyOption.SKIP_EXISTING);
+                personsWithOriginalPhoto.add(person);
+            } catch (NotFoundFileOperationException e) {
+                log.debug("Person '" + person + "' heeft geen originele foto meer.");
             } catch (Exception e) {
                 log.warn("Foto: " + fromPath + " kan niet worden gekopieerd naar: '" + toPath + "': " + e.getMessage());
             }
         }
-        log.info("Exporteer foto's: " + count + " foto's geexporteerd naar " + brandweerConfig.getExportDir());
+        log.info("Exporteer foto's: " + personsWithOriginalPhoto.size() + " foto's geexporteerd naar " + brandweerConfig.getExportDir());
+
+        return personsWithOriginalPhoto;
     }
 
     @Override
@@ -115,24 +113,66 @@ public class ExportServiceImpl implements ExportService {
     }
 
     @Override
-    public void exportAll(List<Person> personsForExport) {
-        exportPhotos(personsForExport);
-        exportPersonsAsCsv(personsAsCsv(personsForExport));
-        log.info("Export: exported " + personsForExport.size() + " persons.");
+    public List<Person> exportAll(List<Person> personsForExport) {
+        List<Person> exportedPersons = exportPhotos(personsForExport);
+        exportPersonsAsCsv(personsAsCsv(exportedPersons));
+
+        return exportedPersons;
     }
 
     @Override
-    public void exportAllWithEmailOnlyNew() {
+    public void exportAllWithEmail() {
         List<Person> personsForExport = personDAO.allWithEmail();
-        exportPhotosOnlyNew(personsForExport);
-        exportPersonsAsCsv(personsAsCsv(personsForExport));
+        List<Person> exportedPersons = exportAll(personsForExport);
+
+        List<Person> removedPersons = new ArrayList<Person>();
+        for (Person personForExport : personsForExport) {
+            if (!exportedPersons.contains(personForExport)) {
+                removedPersons.add(personForExport);
+            }
+        }
+        archivePersons(removedPersons);
     }
 
     @Override
     public void exportPersonsAsCsv(String personsAsCsv) {
         BrandweerConfig brandweerConfig = configService.getConfig();
-        String fileName = brandweerConfig.getExportDir() + "/emailadressen.csv";
-        fileOperations.write(fileName, personsAsCsv);
-        log.info("exported all photos to csv: " + Utils.nativePath(fileName));
+        exportPersonsAsCsv(personsAsCsv, brandweerConfig.getExportDir());
     }
+
+    private void exportPersonsAsCsv(String personsAsCsv, String exportDir) {
+        String fileName = exportDir + "/emailadressen.csv";
+        fileOperations.write(fileName, personsAsCsv);
+        log.info("exported photos to csv: " + Utils.nativePath(fileName));
+    }
+
+    public void archivePersons(List<Person> persons) {
+        if (!persons.isEmpty()) {
+            BrandweerConfig brandweerConfig = configService.getConfig();
+
+            String archiveDir = brandweerConfig.getExportDir() + "/archief-" + DATEFORMAT_YYYYMMDD_HHMMSS.format(new Date());
+            fileOperations.createDirectoryRecursive(archiveDir);
+
+            String personsAsCsv = personsAsCsv(persons);
+            exportPersonsAsCsv(personsAsCsv, archiveDir);
+
+            // remove traces...
+            for (Person person : persons) {
+                String exportedPhotoPath = exportPhotoPath(person);
+                if (fileOperations.fileExists(exportedPhotoPath)) {
+                    fileOperations.moveFileToDir(exportedPhotoPath, archiveDir);
+                }
+                // delete persons from database
+                personDAO.delete(person);
+            }
+        }
+    }
+
+    private String exportPhotoPath(Person person) {
+        BrandweerConfig brandweerConfig = configService.getConfig();
+        return brandweerConfig.getExportDir() + "/" + person.photoAsHumanityHouseFileName(
+                brandweerConfig.getImagePrefix(), brandweerConfig.getImagePrefixReplacement());
+    }
+
+
 }
